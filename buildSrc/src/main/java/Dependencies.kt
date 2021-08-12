@@ -54,8 +54,9 @@ object TestDependencies {
 }
 
 object KoinDependencies {
-  const val koinCore = "io.insert-koin:koin-core:${Versions.koin}"
-  const val koinTest = "io.insert-koin:koin-test:${Versions.koin}"
+  const val koinCore ="io.insert-koin:koin-android:${Versions.koin}"
+  const val koinWorkManager ="io.insert-koin:koin-androidx-workmanager:${Versions.koin}"
+  const val koinCompose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
 }
 
 object GlideDependencies {

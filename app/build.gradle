@@ -51,7 +51,8 @@ dependencies {
     //DI library, in this case we can use Hilt/Dagger/Koin/Kodein.
     // Koin for Kotlin apps
     implementation(KoinDependencies.koinCore)
-    testImplementation(KoinDependencies.koinTest)
+    implementation(KoinDependencies.koinCompose)
+    implementation(KoinDependencies.koinWorkManager)
 
     //Glide for the images
     implementation(GlideDependencies.glide)
