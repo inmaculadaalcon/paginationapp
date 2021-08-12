@@ -71,4 +71,8 @@ dependencies {
     implementation(ArrowDependencies.arrow_core)
     implementation(ArrowDependencies.arrow_fx)
     implementation(ArrowDependencies.arrow_fx_coroutines)
+
+    //Coroutines
+    implementation(CoroutinesDependencies.coroutines_core)
+    implementation(CoroutinesDependencies.coroutines_android)
 }

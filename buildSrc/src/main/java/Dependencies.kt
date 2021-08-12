@@ -15,6 +15,11 @@ object Versions {
   const val retrofit_conv_moshi = "2.4.0"
 
   const val arrow = "0.10.5"
+
+  object Coroutines {
+    const val CORE = "1.4.2"
+    const val ANDROID = "1.4.2"
+  }
 }
 
 object DefaultConfigValues {
@@ -71,4 +76,9 @@ object ArrowDependencies {
   const val arrow_core = "io.arrow-kt:arrow-core-data:${Versions.arrow}"
   const val arrow_fx = "io.arrow-kt:arrow-fx:${Versions.arrow}"
   const val arrow_fx_coroutines = "io.arrow-kt:arrow-fx-kotlinx-coroutines:${Versions.arrow}"
+}
+
+object CoroutinesDependencies {
+  const val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.Coroutines.CORE}"
+  const val coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.Coroutines.ANDROID}"
 }
