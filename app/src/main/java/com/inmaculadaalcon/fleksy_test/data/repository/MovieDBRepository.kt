@@ -16,6 +16,7 @@ class MovieDBRepository(private val remote: RemoteMovieDBDatasources) {
   fun getTopRatedTVShows(page: Int): Flow<Either<StateError<DomainError>, State<TopRatedTVShow>>> =
     object : BaseRepository<DomainError, TopRatedTVShow> {
       override suspend fun fetchFromRemote() {
+        println("RUINA fetchFromRemote ->")
           remote.getTopRatedTVShows(page)
       }
 

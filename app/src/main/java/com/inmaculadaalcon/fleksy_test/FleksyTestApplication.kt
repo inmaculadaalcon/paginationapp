@@ -1,10 +1,7 @@
 package com.inmaculadaalcon.fleksy_test
 
 import android.app.Application
-import com.inmaculadaalcon.fleksy_test.di.dataSourceModule
-import com.inmaculadaalcon.fleksy_test.di.networkModule
-import com.inmaculadaalcon.fleksy_test.di.repositoryModule
-import com.inmaculadaalcon.fleksy_test.di.useCaseModule
+import com.inmaculadaalcon.fleksy_test.di.*
 import org.koin.core.context.startKoin
 import org.koin.android.ext.koin.androidContext
 
@@ -17,6 +14,7 @@ class FleksyTestApplication: Application() {
       modules(
         networkModule,
         useCaseModule,
+        viewModelModule,
         repositoryModule,
         dataSourceModule
       )

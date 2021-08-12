@@ -13,11 +13,13 @@ class RemoteMovieDBDatasources(private val apiClient: MovieDBApiClient) {
 
   suspend fun getTopRatedTVShows(page: Int): Either<DomainError, TopRatedTVShow> =
     try {
+      println("RUINA Exception -> $page")
         mapResponse(apiClient.getTopRatedTV(page)) {
           topRatedTvShowDto ->
             topRatedTvShowDto.toDomain()
         }
     }catch (exception: Exception) {
+      println("RUINA Exception -> ${exception.localizedMessage}")
       Either.left(exception.apiException())
     }
 

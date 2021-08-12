@@ -10,6 +10,9 @@ import kotlinx.coroutines.flow.Flow
 
 class GetTopRatedTv(private val repository: MovieDBRepository) {
 
-  fun getTopRatedTVShows(page: Int): Flow<Either<StateError<DomainError>, State<TopRatedTVShow>>> =
-    repository.getTopRatedTVShows(page)
+  fun getTopRatedTVShows(page: Int): Flow<Either<StateError<DomainError>, State<TopRatedTVShow>>> {
+    println("RUINA getTopRatedTVShows ->")
+    return  repository.getTopRatedTVShows(page)
+  }
+
 }

@@ -6,6 +6,7 @@ import com.inmaculadaalcon.fleksy_test.data.datasource.RemoteMovieDBDatasources
 import com.inmaculadaalcon.fleksy_test.data.repository.MovieDBRepository
 import com.inmaculadaalcon.fleksy_test.domain.usecase.GetSimilarTVShows
 import com.inmaculadaalcon.fleksy_test.domain.usecase.GetTopRatedTv
+import com.inmaculadaalcon.fleksy_test.ui.main.MainViewModel
 import org.koin.dsl.module
 
 val networkModule = module {
@@ -24,6 +25,12 @@ val useCaseModule = module {
 
   single {
     GetSimilarTVShows(get())
+  }
+}
+
+val viewModelModule = module {
+  single {
+    MainViewModel(get())
   }
 }
 

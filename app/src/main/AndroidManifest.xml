@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.inmaculadaalcon.fleksy_test">
+  xmlns:tools="http://schemas.android.com/tools"
+  package="com.inmaculadaalcon.fleksy_test">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:name=".FleksyTestApplication"
@@ -9,6 +10,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Fleksytest" />
+        android:theme="@style/Theme.Fleksytest" >
+        <activity
+          android:name=".ui.main.MainActivity"
+          android:screenOrientation="portrait"
+          android:label="@string/app_name"
+          android:noHistory="true"
+          android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+        </activity>
+    </application>
 
 </manifest>

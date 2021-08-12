@@ -20,7 +20,8 @@ android {
 
     buildTypes {
       getByName(BuildTypes.DEBUG) {
-        buildConfigField 'String','BASE_URL', '\"https://api.themoviedb.org/3/\"'
+        buildConfigField ("String", "API_KEY", API_KEY)
+        buildConfigField ("String","BASE_URL", "\"https://api.themoviedb.org/3/\"")
       }
     }
 
@@ -76,4 +77,9 @@ dependencies {
     //Coroutines
     implementation(CoroutinesDependencies.coroutines_core)
     implementation(CoroutinesDependencies.coroutines_android)
+
+    //implementation(LifeCycleDependencies.lifecycle_compiler)
+    implementation(LifeCycleDependencies.lifecycle_livedata)
+    implementation(LifeCycleDependencies.lifecycle_runtime)
+    implementation(LifeCycleDependencies.lifecycle_viewmodel)
 }

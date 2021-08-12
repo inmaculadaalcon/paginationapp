@@ -20,6 +20,10 @@ object Versions {
     const val CORE = "1.4.2"
     const val ANDROID = "1.4.2"
   }
+
+  object LyfeCycle {
+    const val LIFECYCLE = "2.3.1"
+  }
 }
 
 object DefaultConfigValues {
@@ -82,4 +86,11 @@ object ArrowDependencies {
 object CoroutinesDependencies {
   const val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.Coroutines.CORE}"
   const val coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.Coroutines.ANDROID}"
+}
+
+object LifeCycleDependencies {
+  const val lifecycle_compiler = "androidx.lifecycle:lifecycle-compiler:${Versions.LyfeCycle.LIFECYCLE}"
+  const val lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.LyfeCycle.LIFECYCLE}"
+  const val lifecycle_runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.LyfeCycle.LIFECYCLE}"
+  const val lifecycle_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LyfeCycle.LIFECYCLE}"
 }
