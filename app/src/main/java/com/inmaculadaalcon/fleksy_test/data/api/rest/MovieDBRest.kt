@@ -12,5 +12,5 @@ interface MovieDBRest {
   suspend fun getTopRatedTV(@Path("api_key")apiKey: String, @Path("language")language: String = "en-US", @Path("page")page: Int = 1): TopRatedTvShowDto
 
   @GET("${BuildConfig.BASE_URL}tv/{tv_id}/similar?api_key={api_key}}&language={language}&page={page}")
-  suspend fun getSimilarTVShows(@Path("api_key")apiKey: String, @Path("tv_id")tvId: String, @Path("language")language: String, @Path("page")page:Int = 1): SimilarTVShowDto
+  suspend fun getSimilarTVShows(@Path("api_key")apiKey: String, @Path("tv_id")tvId: Int, @Path("language")language: String, @Path("page")page:Int = 1): SimilarTVShowDto
 }
