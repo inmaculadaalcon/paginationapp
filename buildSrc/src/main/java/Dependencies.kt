@@ -24,6 +24,9 @@ object Versions {
   object LyfeCycle {
     const val LIFECYCLE = "2.3.1"
   }
+  object RecyclerView {
+    const val RECYCLER = "1.2.1"
+  }
 }
 
 object DefaultConfigValues {
@@ -93,4 +96,8 @@ object LifeCycleDependencies {
   const val lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.LyfeCycle.LIFECYCLE}"
   const val lifecycle_runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.LyfeCycle.LIFECYCLE}"
   const val lifecycle_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LyfeCycle.LIFECYCLE}"
+}
+
+object RecyclerViewDependencies {
+  const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.RecyclerView.RECYCLER}"
 }

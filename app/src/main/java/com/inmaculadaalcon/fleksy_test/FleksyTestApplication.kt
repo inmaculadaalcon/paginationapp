@@ -14,9 +14,9 @@ class FleksyTestApplication: Application() {
       modules(
         networkModule,
         useCaseModule,
-        viewModelModule,
         repositoryModule,
-        dataSourceModule
+        dataSourceModule,
+        viewModelModule
       )
     }
   }

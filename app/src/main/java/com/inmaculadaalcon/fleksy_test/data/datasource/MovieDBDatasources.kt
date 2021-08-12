@@ -19,7 +19,6 @@ class RemoteMovieDBDatasources(private val apiClient: MovieDBApiClient) {
             topRatedTvShowDto.toDomain()
         }
     }catch (exception: Exception) {
-      println("RUINA Exception -> ${exception.localizedMessage}")
       Either.left(exception.apiException())
     }
 

@@ -18,22 +18,6 @@ val networkModule = module {
   }
 }
 
-val useCaseModule = module {
-  single {
-    GetTopRatedTv(get())
-  }
-
-  single {
-    GetSimilarTVShows(get())
-  }
-}
-
-val viewModelModule = module {
-  single {
-    MainViewModel(get())
-  }
-}
-
 val repositoryModule = module {
   single {
     MovieDBRepository(get())
@@ -43,5 +27,23 @@ val repositoryModule = module {
 val dataSourceModule = module {
   single {
     RemoteMovieDBDatasources(get())
+  }
+}
+
+
+val viewModelModule = module {
+  single {
+    MainViewModel(get())
+  }
+}
+
+
+val useCaseModule = module {
+  single {
+    GetTopRatedTv(get())
+  }
+
+  single {
+    GetSimilarTVShows(get())
   }
 }

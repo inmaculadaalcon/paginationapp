@@ -1,6 +1,7 @@
 package com.inmaculadaalcon.fleksy_test.data.repository
 
 import arrow.core.Either
+import arrow.core.Left
 import com.inmaculadaalcon.fleksy_test.data.datasource.RemoteMovieDBDatasources
 import com.inmaculadaalcon.fleksy_test.domain.model.DomainError
 import com.inmaculadaalcon.fleksy_test.domain.model.SimilarTVShow
@@ -16,14 +17,12 @@ class MovieDBRepository(private val remote: RemoteMovieDBDatasources) {
   fun getTopRatedTVShows(page: Int): Flow<Either<StateError<DomainError>, State<TopRatedTVShow>>> =
     object : BaseRepository<DomainError, TopRatedTVShow> {
       override suspend fun fetchFromRemote() {
-        println("RUINA fetchFromRemote ->")
-          remote.getTopRatedTVShows(page)
+      println("RUINA fetchFromRemote ->")
+          remote.getTopRatedTVShows(page).fold(::Left) {
+            it -> println("FetchFromRemote: $it")
+          }
       }
 
-      override fun fetchFromLocal(): Flow<Either<DomainError, TopRatedTVShow>> {
-        TODO("Not yet implemented")
-        //This would be able if the requirements changed
-      }
     }.asFlow().flowOn(Dispatchers.IO)
 
   fun getSimilarTVShows(idTVShow: Int, page: Int): Flow<Either<StateError<DomainError>, State<SimilarTVShow>>> =
@@ -31,10 +30,6 @@ class MovieDBRepository(private val remote: RemoteMovieDBDatasources) {
 
       override suspend fun fetchFromRemote() {
         remote.getSimilarTVShows(idTVShow, page)
-      }
-
-      override fun fetchFromLocal(): Flow<Either<DomainError, SimilarTVShow>> {
-        TODO("Not yet implemented")
       }
 
     } .asFlow().flowOn(Dispatchers.IO)

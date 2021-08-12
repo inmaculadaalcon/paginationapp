@@ -82,4 +82,7 @@ dependencies {
     implementation(LifeCycleDependencies.lifecycle_livedata)
     implementation(LifeCycleDependencies.lifecycle_runtime)
     implementation(LifeCycleDependencies.lifecycle_viewmodel)
+
+   //RecyclerView Androidx
+    implementation(RecyclerViewDependencies.recyclerview)
 }
