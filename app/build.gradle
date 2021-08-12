@@ -57,8 +57,4 @@ dependencies {
     //OkHttp - It's a modern way for exchange data and medaia. Doing HTTP efficiently, loading faster
     implementation(SquareDependencies.okhttp)
 
-
-
-
-
 }
