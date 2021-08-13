@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">fleksy-test</string>
+    <string name="retry">retry</string>
 </resources>
