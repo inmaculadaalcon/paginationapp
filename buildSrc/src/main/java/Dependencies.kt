@@ -10,7 +10,39 @@ object Versions {
   const val koin = "3.1.2"
   const val material = "1.4.0"
   const val moshi = "1.12.0"
+  const val okhttp = "4.9.1"
   const val retrofit = "2.9.0"
+  const val retrofit_conv_moshi = "2.4.0"
+
+  const val arrow = "0.10.5"
+
+  object Coroutines {
+    const val CORE = "1.4.2"
+    const val ANDROID = "1.4.2"
+  }
+
+  object LyfeCycle {
+    const val LIFECYCLE = "2.3.1"
+  }
+  object RecyclerView {
+    const val RECYCLER = "1.2.1"
+  }
+}
+
+object DefaultConfigValues {
+  const val BUILD_TOOLS = "30.0.2"
+  const val APPLICATION_ID = "com.inmaculadaalcon.fleksy_test"
+  const val COMPILE_SDK = 31
+  const val MIN_SDK = 21
+  const val TARGET_SDK = 31
+
+  const val VERSION_CODE = 1
+  const val VERSION_NAME = "1.0"
+}
+
+object BuildTypes {
+  const val DEBUG = "debug"
+  const val RELEASE = "release"
 }
 
 object AndroidxDependencies {
@@ -29,8 +61,9 @@ object TestDependencies {
 }
 
 object KoinDependencies {
-  const val koinCore = "io.insert-koin:koin-core:${Versions.koin}"
-  const val koinTest = "io.insert-koin:koin-test:${Versions.koin}"
+  const val koinCore ="io.insert-koin:koin-android:${Versions.koin}"
+  const val koinWorkManager ="io.insert-koin:koin-androidx-workmanager:${Versions.koin}"
+  const val koinCompose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
 }
 
 object GlideDependencies {
@@ -40,6 +73,31 @@ object GlideDependencies {
 
 object SquareDependencies {
   const val retrofit =  "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+  const val retrofit_converter_moshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit_conv_moshi}"
   const val moshi = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
-  const val okhttp = "com.squareup.okhttp3:okhttp:4.9.1"
+  const val moshi_codegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
+  const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
+  const val okhttp_loggin_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
+}
+
+object ArrowDependencies {
+  const val arrow_core = "io.arrow-kt:arrow-core-data:${Versions.arrow}"
+  const val arrow_fx = "io.arrow-kt:arrow-fx:${Versions.arrow}"
+  const val arrow_fx_coroutines = "io.arrow-kt:arrow-fx-kotlinx-coroutines:${Versions.arrow}"
+}
+
+object CoroutinesDependencies {
+  const val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.Coroutines.CORE}"
+  const val coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.Coroutines.ANDROID}"
+}
+
+object LifeCycleDependencies {
+  const val lifecycle_compiler = "androidx.lifecycle:lifecycle-compiler:${Versions.LyfeCycle.LIFECYCLE}"
+  const val lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.LyfeCycle.LIFECYCLE}"
+  const val lifecycle_runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.LyfeCycle.LIFECYCLE}"
+  const val lifecycle_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LyfeCycle.LIFECYCLE}"
+}
+
+object RecyclerViewDependencies {
+  const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.RecyclerView.RECYCLER}"
 }

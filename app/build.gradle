@@ -1,42 +1,53 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
-    compileSdk 31
+    compileSdkVersion(DefaultConfigValues.COMPILE_SDK)
+    buildToolsVersion = DefaultConfigValues.BUILD_TOOLS
 
     defaultConfig {
-        applicationId "com.inmaculadaalcon.fleksy_test"
-        minSdk 21
-        targetSdk 31
-        versionCode 1
-        versionName "1.0"
-
+        applicationId DefaultConfigValues.APPLICATION_ID
+        minSdk DefaultConfigValues.MIN_SDK
+        targetSdk DefaultConfigValues.TARGET_SDK
+        versionCode DefaultConfigValues.VERSION_CODE
+        versionName DefaultConfigValues.VERSION_NAME
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+      getByName(BuildTypes.DEBUG) {
+        buildConfigField ("String", "API_KEY", API_KEY)
+        buildConfigField ("String","BASE_URL", "\"https://api.themoviedb.org/3/\"")
+      }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+  buildFeatures {
+    viewBinding = true
+  }
 }
 
 dependencies {
     implementation (AndroidxDependencies.corektx)
     implementation (AndroidxDependencies.appcompat)
     implementation(MaterialDependencies.material)
+    implementation 'androidx.paging:paging-common-ktx:3.0.1'
+    implementation "androidx.paging:paging-runtime-ktx:3.0.1" // For Kotlin use paging-runtime-ktx
 
-    //Testing libraries
+
+  //Testing libraries
     testImplementation(TestDependencies.junitTestImplementation)
     androidTestImplementation(TestDependencies.junitAndroidTestImplementation)
     androidTestImplementation(TestDependencies.espresso)
@@ -44,7 +55,8 @@ dependencies {
     //DI library, in this case we can use Hilt/Dagger/Koin/Kodein.
     // Koin for Kotlin apps
     implementation(KoinDependencies.koinCore)
-    testImplementation(KoinDependencies.koinTest)
+    implementation(KoinDependencies.koinCompose)
+    implementation(KoinDependencies.koinWorkManager)
 
     //Glide for the images
     implementation(GlideDependencies.glide)
@@ -52,9 +64,28 @@ dependencies {
 
     //Retrofit and Moshi for getting the datas from Internet and parser them
     implementation(SquareDependencies.retrofit)
+    implementation(SquareDependencies.retrofit_converter_moshi)
     implementation(SquareDependencies.moshi)
+    kapt(SquareDependencies.moshi_codegen)
 
     //OkHttp - It's a modern way for exchange data and medaia. Doing HTTP efficiently, loading faster
     implementation(SquareDependencies.okhttp)
+    implementation(SquareDependencies.okhttp_loggin_interceptor)
 
+    //Arrow for using for example Either
+    implementation(ArrowDependencies.arrow_core)
+    implementation(ArrowDependencies.arrow_fx)
+    implementation(ArrowDependencies.arrow_fx_coroutines)
+
+    //Coroutines
+    implementation(CoroutinesDependencies.coroutines_core)
+    implementation(CoroutinesDependencies.coroutines_android)
+
+    //implementation(LifeCycleDependencies.lifecycle_compiler)
+    implementation(LifeCycleDependencies.lifecycle_livedata)
+    implementation(LifeCycleDependencies.lifecycle_runtime)
+    implementation(LifeCycleDependencies.lifecycle_viewmodel)
+
+   //RecyclerView Androidx
+    implementation(RecyclerViewDependencies.recyclerview)
 }
