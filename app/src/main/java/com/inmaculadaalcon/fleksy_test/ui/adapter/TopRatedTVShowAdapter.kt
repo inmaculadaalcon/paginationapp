@@ -9,7 +9,6 @@ import com.inmaculadaalcon.fleksy_test.BuildConfig
 import com.inmaculadaalcon.fleksy_test.R
 import com.inmaculadaalcon.fleksy_test.databinding.TopRatedTvShowItemViewBinding
 import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
-import com.inmaculadaalcon.fleksy_test.domain.model.TopRatedTVShow
 import kotlin.properties.Delegates
 
 class TopRatedTVShowAdapter: RecyclerView.Adapter<TopRatedTVShowAdapter.ViewHolder>() {

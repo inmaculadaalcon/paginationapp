@@ -38,12 +38,14 @@ class MainActivity() : BaseActivity<ActivityMainBinding>() {
        val data =  it?.data
         if(data!=null) {
           adapter.items = data.results
-          println("Value: -< $data")
         }
       }
     }
-
     viewModel.getTopRatedTV(1)
+
+   /* binding.recyclerview.addOnScrollListener(PaginationScrollListener(linearLayoutManager){
+
+    })*/
   }
 
 }

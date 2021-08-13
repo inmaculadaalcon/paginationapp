@@ -19,7 +19,6 @@ class MainViewModel(private val getTopRatedTv: GetTopRatedTv): ViewModel() {
   fun getTopRatedTV(page: Int) {
     viewModelScope.launch {
       getTopRatedTv.getTopRatedTVShows(page).collect {
-        println("RUINA Recoge algo???? -> $it")
         it.fold(
           {handleError(it)},
           {handleState(it)}
@@ -28,12 +27,12 @@ class MainViewModel(private val getTopRatedTv: GetTopRatedTv): ViewModel() {
       }
     }
 
-  suspend fun <T>handleState(it:T) {
+  fun <T>handleState(it:T) {
     val topRatedTVShowsStateScreen = TopRatedTVShowsStateScreen.SuccessTopRatedTVShows(it as TopRatedTVShow)
     screenStateQueue.value = topRatedTVShowsStateScreen
   }
 
-  suspend fun handleError(it: DomainError) {
+  fun handleError(it: DomainError) {
 
   }
 }
