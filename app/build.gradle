@@ -43,8 +43,11 @@ dependencies {
     implementation (AndroidxDependencies.corektx)
     implementation (AndroidxDependencies.appcompat)
     implementation(MaterialDependencies.material)
+    implementation 'androidx.paging:paging-common-ktx:3.0.1'
+    implementation "androidx.paging:paging-runtime-ktx:3.0.1" // For Kotlin use paging-runtime-ktx
 
-    //Testing libraries
+
+  //Testing libraries
     testImplementation(TestDependencies.junitTestImplementation)
     androidTestImplementation(TestDependencies.junitAndroidTestImplementation)
     androidTestImplementation(TestDependencies.espresso)

@@ -2,16 +2,28 @@ package com.inmaculadaalcon.fleksy_test.ui.base
 
 import android.content.Context
 import android.content.res.Configuration
+import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewbinding.ViewBinding
 import org.koin.core.component.KoinComponent
 
-abstract class BaseActivity: AppCompatActivity(), KoinComponent{
+abstract class BaseActivity<T: ViewBinding>: AppCompatActivity(), KoinComponent{
 
-  //This method is for adapting the UI for all font scales
-  override fun attachBaseContext(newBase: Context) {
-    val newConfigFont = Configuration(newBase.resources.configuration)
-    newConfigFont.fontScale = 1.0f
-    applyOverrideConfiguration(newConfigFont)
-    super.attachBaseContext(newBase)
+  private var _binding: ViewBinding? = null
+  abstract val bindingInflater: (LayoutInflater) -> T
+
+  protected val binding: T
+    get() = _binding as T
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    _binding = bindingInflater.invoke(layoutInflater)
+    setContentView(requireNotNull(_binding).root)
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    _binding = null
   }
 }

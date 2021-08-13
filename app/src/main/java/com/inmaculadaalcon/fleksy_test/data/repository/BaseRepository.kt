@@ -11,10 +11,7 @@ import kotlinx.coroutines.flow.flow
 
 interface BaseRepository<E: DomainError, T> {
 
-  fun asFlow(loading: Boolean = true) = flow<Either<StateError<E>, State<T>>> {
-    if (loading) {
-      emit(Either.right(State.Loading()))
-    }
+  fun asFlow(loading: Boolean = true) = flow<Either<E,T>> {
     val datasources = mutableListOf<Datasource>()
     datasources.forEach { ds ->
       when(ds) {
