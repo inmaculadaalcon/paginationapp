@@ -23,7 +23,7 @@ class TopRatedTVShowAdapter: RecyclerView.Adapter<TopRatedTVShowAdapter.ViewHold
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int
-  ): TopRatedTVShowAdapter.ViewHolder {
+  ): ViewHolder {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.top_rated_tv_show_item_view, parent, false)
     return ViewHolder(view)
   }
