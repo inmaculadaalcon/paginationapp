@@ -4,14 +4,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.inmaculadaalcon.fleksy_test.BuildConfig
 import com.inmaculadaalcon.fleksy_test.R
 import com.inmaculadaalcon.fleksy_test.databinding.TopRatedTvShowItemViewBinding
+import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
 import com.inmaculadaalcon.fleksy_test.domain.model.TopRatedTVShow
 import kotlin.properties.Delegates
 
 class TopRatedTVShowAdapter: RecyclerView.Adapter<TopRatedTVShowAdapter.ViewHolder>() {
 
-  var items: List<TopRatedTVShow> by Delegates.observable(emptyList()) {_, _, _ ->
+  var items: List<TVShow> by Delegates.observable(emptyList()) {_, _, _ ->
     notifyDataSetChanged()
   }
 
@@ -24,14 +27,15 @@ class TopRatedTVShowAdapter: RecyclerView.Adapter<TopRatedTVShowAdapter.ViewHold
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.bind(items[position].results[0].name)
+    holder.bind(items[position])
   }
 
   class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val binding = TopRatedTvShowItemViewBinding.bind(view)
 
-    fun bind(value: String) {
-      binding.text.text = value
+    fun bind(tvShow: TVShow) {
+      Glide.with(itemView.context).load(BuildConfig.IMAGE_BASE_URL+tvShow.posterPath).into(binding.tvshowImage)
+      binding.tvshowText.text = tvShow.name
     }
   }
 

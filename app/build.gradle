@@ -21,6 +21,7 @@ android {
     buildTypes {
       getByName(BuildTypes.DEBUG) {
         buildConfigField ("String", "API_KEY", API_KEY)
+        buildConfigField ("String", "IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/original/\"")
         buildConfigField ("String","BASE_URL", "\"https://api.themoviedb.org/3/\"")
       }
     }
