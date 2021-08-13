@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import arrow.core.extensions.list.align.empty
 import com.bumptech.glide.Glide
 import com.inmaculadaalcon.fleksy_test.BuildConfig
 import com.inmaculadaalcon.fleksy_test.R
@@ -16,9 +18,11 @@ import kotlin.properties.Delegates
 
 class TopRatedTVShowAdapter: RecyclerView.Adapter<TopRatedTVShowAdapter.ViewHolder>() {
 
-   var items: List<TVShow> by Delegates.observable(emptyList()) {_, _, _ ->
+  var items: List<TVShow> by Delegates.observable(emptyList()) { _, old, new ->
     notifyDataSetChanged()
   }
+
+
 
   override fun onCreateViewHolder(
     parent: ViewGroup,
