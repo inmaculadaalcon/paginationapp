@@ -1,5 +1,6 @@
 package com.inmaculadaalcon.fleksy_test.data.api.client
 
+import com.inmaculadaalcon.fleksy_test.BuildConfig
 import com.inmaculadaalcon.fleksy_test.data.api.config.ServerApiClient
 import com.inmaculadaalcon.fleksy_test.data.api.config.ServerApiConfig
 import com.inmaculadaalcon.fleksy_test.data.api.model.SimilarTVShowDto
@@ -7,7 +8,7 @@ import com.inmaculadaalcon.fleksy_test.data.api.model.TopRatedTvShowDto
 import com.inmaculadaalcon.fleksy_test.data.api.rest.MovieDBRest
 
 class MovieDBApiClient(serverApiConfig: ServerApiConfig.ServerApiTheMovieDBConfig): ServerApiClient(serverApiConfig) {
-  var apiKey = ""
+  var apiKey = BuildConfig.API_KEY
   companion object {
     const val DEFAULT_LANGUAGE = "en-US"
   }
