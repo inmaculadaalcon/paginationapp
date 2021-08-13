@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 class GetSimilarTVShows(private val repository: MovieDBRepository) {
 
-  fun getSimilarTVShows(idTvShow: Int, page: Int): Flow<Either<DomainError, SimilarTVShow>> =
-    repository.getSimilarTVShows(idTvShow, page)
+  //fun getSimilarTVShows(idTvShow: Int, page: Int): Flow<Either<DomainError, SimilarTVShow>>
+    //repository.getSimilarTVShows(idTvShow, page)
 
 }

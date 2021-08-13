@@ -30,14 +30,6 @@ val dataSourceModule = module {
   }
 }
 
-
-val viewModelModule = module {
-  single {
-    MainViewModel(get())
-  }
-}
-
-
 val useCaseModule = module {
   single {
     GetTopRatedTv(get())
@@ -45,5 +37,11 @@ val useCaseModule = module {
 
   single {
     GetSimilarTVShows(get())
+  }
+}
+
+val viewModelModule = module {
+  single {
+    MainViewModel(get())
   }
 }
