@@ -1,11 +1,11 @@
 package com.inmaculadaalcon.fleksy_test.ui.adapter
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.DiffUtil
 import com.inmaculadaalcon.fleksy_test.databinding.TopRatedTvShowItemViewBinding
 import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
 import com.inmaculadaalcon.fleksy_test.ui.detail.DetailTVShowActivity
@@ -20,7 +20,9 @@ class TopRatedTVShowsAdapter: PagingDataAdapter<TVShow, TVShowViewHolder>(TVShow
         )
         holder.binding.root.setOnClickListener { view ->
             getItem(holder.adapterPosition)?.let { tvShow ->
-                startActivity(view.context, Intent(view.context, DetailTVShowActivity::class.java),null)
+                val intent = Intent(view.context, DetailTVShowActivity::class.java)
+                intent.putExtra(DetailTVShowActivity.BACKGROUND_COLOR, tvShow.backgroundColor)
+                startActivity(view.context, intent, null)
             }
         }
         return holder

@@ -1,5 +1,7 @@
 package com.inmaculadaalcon.fleksy_test.domain.model
 
+import com.inmaculadaalcon.fleksy_test.R
+
 data class TopRatedTVShow (
   val page: Int,
   val results: List<TVShow>,
@@ -21,7 +23,7 @@ open class TVShow(
   open val posterPath: String?,
   open val voteAverage: Double?,
   open val voteCount: Int?,
-  open val backgroundColor: Int? = null
+  open val backgroundColor: Int
 )
 
 data class SimilarTVShow(
@@ -46,4 +48,4 @@ data class SimilarTVShowItem(
   override val posterPath: String,
   override val voteAverage: Double,
   override val voteCount: Int
-): TVShow(backdropPath, firstAirDate,genreIds,id,name,originCountry,originalLanguage,originalName,overview,popularity,posterPath,voteAverage,voteCount)
+): TVShow(backdropPath, firstAirDate,genreIds,id,name,originCountry,originalLanguage,originalName,overview,popularity,posterPath,voteAverage,voteCount, backgroundColor = R.drawable.background_green)

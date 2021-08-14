@@ -71,7 +71,7 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(){
     }
 
     private fun renderUI(loadState: CombinedLoadStates) {
-    val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter?.itemCount == 0
+    val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
 
     binding.recyclerview.isVisible = !isListEmpty
     binding.tvshowEmpty.isVisible = isListEmpty
