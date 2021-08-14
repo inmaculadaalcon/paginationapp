@@ -8,8 +8,11 @@ import com.inmaculadaalcon.fleksy_test.data.api.model.DetailTVShowDto
 import com.inmaculadaalcon.fleksy_test.data.api.model.TVShowDto
 import com.inmaculadaalcon.fleksy_test.data.api.rest.MovieDBRest
 import com.inmaculadaalcon.fleksy_test.data.api.rest.TVShowsPagingSource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flowOn
 
 internal class TVShowDataSourceImpl(private val movieDBRest: MovieDBRest): TVShowsDatasources {
 
@@ -28,11 +31,8 @@ internal class TVShowDataSourceImpl(private val movieDBRest: MovieDBRest): TVSho
         ).flow
     }
 
-    override fun getDetailTVShow(tvShowId: Int): Flow<DetailTVShowDto> {
-       return flow<DetailTVShowDto> {
-            movieDBRest.getDetailTVShow(tvShowId, language = "en-US")
+    override suspend fun getDetailTVShow(tvShowId: Int): Flow<DetailTVShowDto> {
+       return flowOf<DetailTVShowDto>(
+            movieDBRest.getDetailTVShow(tvShowId, language = "en-US"))
         }
     }
-
-
-}

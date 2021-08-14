@@ -72,7 +72,7 @@ data class DetailTVShow(
   val originalName: String,
   val overview: String,
   val popularity: Double,
-  val posterPath: String,
+  val posterPath: String?,
   val seasons: List<Season>,
   val spokenLanguages: List<SpokenLanguage>,
   val status: String,
@@ -94,7 +94,7 @@ data class Season(
   val id: Int,
   val name: String,
   val overview: String,
-  val posterPath: String,
+  val posterPath: String?,
   val seasonNumber: Int
 )
 

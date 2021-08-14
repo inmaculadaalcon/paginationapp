@@ -11,5 +11,5 @@ interface TVShowsRepository {
 
   //fun getSimilarTVShows(): Flow<PagingData<SimilarTVShowItem>>
 
-  fun getDetailTVShow(tvShowId: Int): Flow<DetailTVShow>
+  suspend fun getDetailTVShow(tvShowId: Int): Flow<DetailTVShow>
 }

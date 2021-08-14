@@ -49,7 +49,7 @@ data class DetailTVShowDto(
   @Json(name = "original_name")val originalName: String,
   @Json(name = "overview")val overview: String,
   @Json(name = "popularity")val popularity: Double,
-  @Json(name = "poster_path")val posterPath: String,
+  @Json(name = "poster_path")val posterPath: String? = null,
   @Json(name = "seasons")val seasons: List<SeasonDto>,
   @Json(name = "spoken_languages")val spokenLanguages: List<SpokenLanguageDto>,
   @Json(name = "status")val status: String,
@@ -71,7 +71,7 @@ data class SeasonDto(
   @Json(name = "id")val id: Int,
   @Json(name = "name")val name: String,
   @Json(name = "overview")val overview: String,
-  @Json(name = "poster_path")val posterPath: String,
+  @Json(name = "poster_path")val posterPath: String? = null,
   @Json(name = "season_number")val seasonNumber: Int
 )
 

@@ -8,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface TVShowsDatasources {
     fun getTopRatedTVShows(): Flow<PagingData<TVShowDto>>
 
-    fun getDetailTVShow(tvShowId: Int): Flow<DetailTVShowDto>
+    suspend fun getDetailTVShow(tvShowId: Int): Flow<DetailTVShowDto>
 }

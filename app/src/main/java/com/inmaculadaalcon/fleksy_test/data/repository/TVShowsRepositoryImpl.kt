@@ -8,7 +8,9 @@ import com.inmaculadaalcon.fleksy_test.domain.model.DetailTVShow
 import com.inmaculadaalcon.fleksy_test.domain.model.SimilarTVShowItem
 import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
 import com.inmaculadaalcon.fleksy_test.domain.model.toDomain
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
 class TVShowsRepositoryImpl(private val tvShowsDatasources: TVShowsDatasources ): TVShowsRepository {
@@ -20,10 +22,11 @@ class TVShowsRepositoryImpl(private val tvShowsDatasources: TVShowsDatasources )
              }
         }
     }
-    override fun getDetailTVShow(tvShowId: Int): Flow<DetailTVShow> {
+    override suspend fun getDetailTVShow(tvShowId: Int): Flow<DetailTVShow> {
         return tvShowsDatasources.getDetailTVShow(tvShowId).map {
                 detailTVShowDto ->
-            detailTVShowDto.toDomain() }
+            detailTVShowDto.toDomain()
+        }
     }
 
     /*override fun getSimilarTVShows(): Flow<PagingData<SimilarTVShowItem>> {
