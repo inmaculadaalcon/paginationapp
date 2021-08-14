@@ -7,6 +7,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.inmaculadaalcon.fleksy_test.R
 import com.inmaculadaalcon.fleksy_test.databinding.NetworkStateItemBinding
+import com.inmaculadaalcon.fleksy_test.databinding.TvshowsLoadStateItemFooterBinding
 
 class NetworkStateItemViewHolder(
     parent: ViewGroup,
@@ -27,5 +28,14 @@ class NetworkStateItemViewHolder(
         retry.isVisible = loadState is LoadState.Error
         errorMsg.isVisible = !(loadState as? LoadState.Error)?.error?.message.isNullOrBlank()
         errorMsg.text = (loadState as? LoadState.Error)?.error?.message
+    }
+
+    companion object {
+        fun create(parent: ViewGroup, retry: () -> Unit): NetworkStateItemViewHolder {
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.load_more_progress_item, parent, false)
+            val binding = TvshowsLoadStateItemFooterBinding.bind(view)
+            return TVShowLoadStateViewHolder(binding, retry)
+        }
     }
 }

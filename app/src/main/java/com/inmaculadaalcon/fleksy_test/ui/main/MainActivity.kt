@@ -2,7 +2,9 @@ package com.inmaculadaalcon.fleksy_test.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import arrow.core.right
@@ -19,6 +21,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
 
 import org.koin.core.component.inject
 
@@ -27,8 +30,6 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(){
   override val bindingInflater: (LayoutInflater) -> ActivityMainBinding
     get() = ActivityMainBinding::inflate
 
-  private var isLoading: Boolean = false
-  private var isLastPage: Boolean = false
   private val viewModel: MainViewModel by inject()
 
  // private val adapter = TopRatedTVShowAdapter()
@@ -38,40 +39,19 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(){
     super.onCreate(savedInstanceState)
     setContentView(binding.root)
 
+    collectUIState()
+
     binding.recyclerview.setHasFixedSize(true)
     binding.recyclerview.adapter = adapter.withLoadStateHeaderAndFooter(
-      header = TVShowsLoadStateAdapter(adapter),
-      footer = TVShowsLoadStateAdapter(adapter)
+      header = TVShowsLoadStateAdapter{ adapter?.retry()},
+      footer = TVShowsLoadStateAdapter{ adapter?.retry()}
     )
 
     val linearLayoutManager = LinearLayoutManager(this)
     binding.recyclerview.layoutManager = linearLayoutManager
 
-   /* lifecycleScope.launchWhenStarted {
-      viewModel.screenState.collectLatest {
-        val data = it?.data
-        if (data != null) {
-         // adapter.items = data.results
-          adapter.submitData(data.results)
+    adapter?.addLoadStateListener { loadState -> renderUI(loadState) }
 
-          binding.recyclerview.addOnScrollListener(object :
-            PaginationScrollListener(linearLayoutManager) {
-            override fun loadMoreItems() {
-              isLoading = true
-              val nextPage = data.page + 1
-              viewModel.getTopRatedTV(nextPage)
-            }
-
-            override fun getTotalPageCount(): Int = data.totalPages
-
-            override fun isLastPage(): Boolean = isLastPage
-
-            override fun isLoading(): Boolean = isLoading
-
-          })
-        }
-      }
-    }*/
     lifecycleScope.launchWhenCreated {
       adapter.loadStateFlow
         // Use a state-machine to track LoadStates such that we only transition to
@@ -86,10 +66,29 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(){
         .collect { binding.recyclerview.scrollToPosition(0) }
     }
     viewModel.getTopRatedTV(1)
+  }
 
-   /* binding.recyclerview.addOnScrollListener(PaginationScrollListener(linearLayoutManager){
+    private fun collectUIState() {
+        lifecycleScope.launch {
+            viewModel.getTopRatedTV(1).collectLatest { tvshows ->
+                adapter?.submitData(movies)
+            }
+        }
 
-    })*/
+    }
+
+    private fun renderUI(loadState: CombinedLoadStates) {
+    val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter?.itemCount == 0
+
+    binding.recyclerview.isVisible = !isListEmpty
+    binding.tvshowEmpty.isVisible = isListEmpty
+
+    // Only shows the list if refresh succeeds.
+    binding.recyclerview.isVisible = loadState.source.refresh is LoadState.NotLoading
+    // Show loading spinner during initial load or refresh.
+    binding.progressbarTvshows.isVisible = loadState.source.refresh is LoadState.Loading
+    // Show the retry state if initial load or refresh fails.
+    binding.btnMoviesRetry.isVisible = loadState.source.refresh is LoadState.Error
   }
 
 }

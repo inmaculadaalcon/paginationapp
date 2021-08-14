@@ -4,16 +4,16 @@ import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 
-class TVShowsLoadStateAdapter(private val adapter: TopRatedTVShowsAdapter): LoadStateAdapter<NetworkStateItemViewHolder>() {
-    override fun onBindViewHolder(holder: NetworkStateItemViewHolder, loadState: LoadState) {
-        holder.bindTo(loadState)
+class TVShowsLoadStateAdapter(private val retry: () -> Unit): LoadStateAdapter<TVShowLoadStateViewHolder>() {
+    override fun onBindViewHolder(holder: TVShowLoadStateViewHolder, loadState: LoadState) {
+        holder.bind(loadState)
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         loadState: LoadState
-    ): NetworkStateItemViewHolder {
-        return NetworkStateItemViewHolder(parent) { adapter.retry() }
+    ): TVShowLoadStateViewHolder {
+        return TVShowLoadStateViewHolder.create(parent, retry)
     }
 
 }
