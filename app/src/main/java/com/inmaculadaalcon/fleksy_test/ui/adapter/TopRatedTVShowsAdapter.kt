@@ -22,6 +22,7 @@ class TopRatedTVShowsAdapter: PagingDataAdapter<TVShow, TVShowViewHolder>(TVShow
             getItem(holder.adapterPosition)?.let { tvShow ->
                 val intent = Intent(view.context, DetailTVShowActivity::class.java)
                 intent.putExtra(DetailTVShowActivity.BACKGROUND_COLOR, tvShow.backgroundColor)
+                intent.putExtra(DetailTVShowActivity.TV_SHOW_ID, tvShow.id)
                 startActivity(view.context, intent, null)
             }
         }
