@@ -1,4 +1,4 @@
-package com.inmaculadaalcon.fleksy_test.ui.base
+package com.inmaculadaalcon.fleksy_test.domain
 
 import com.squareup.moshi.Json
 

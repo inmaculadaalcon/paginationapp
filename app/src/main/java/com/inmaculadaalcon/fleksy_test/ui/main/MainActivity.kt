@@ -30,9 +30,8 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(){
   override val bindingInflater: (LayoutInflater) -> ActivityMainBinding
     get() = ActivityMainBinding::inflate
 
-  private val viewModel: MainViewModel by inject()
+  private val viewModel: TopRatedTVShowsListViewModel by inject()
 
- // private val adapter = TopRatedTVShowAdapter()
   private val adapter = TopRatedTVShowsAdapter()
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,13 +64,13 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(){
         // Scroll to top is synchronous with UI updates, even if remote load was triggered.
         .collect { binding.recyclerview.scrollToPosition(0) }
     }
-    viewModel.getTopRatedTV(1)
+    viewModel.getTopRatedTVShows()
   }
 
     private fun collectUIState() {
         lifecycleScope.launch {
-            viewModel.getTopRatedTV(1).collectLatest { tvshows ->
-                adapter?.submitData(movies)
+            viewModel.getTopRatedTVShows().collectLatest { tvshows ->
+                adapter.submitData(tvshows)
             }
         }
 

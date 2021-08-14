@@ -35,7 +35,7 @@ class NetworkStateItemViewHolder(
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.load_more_progress_item, parent, false)
             val binding = TvshowsLoadStateItemFooterBinding.bind(view)
-            return TVShowLoadStateViewHolder(binding, retry)
+            return NetworkStateItemViewHolder(binding.root, retry)
         }
     }
 }

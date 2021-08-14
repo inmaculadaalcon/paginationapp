@@ -22,22 +22,23 @@ open class TVShowDto(
   @Json(name = "original_name") open val originalName: String,
   @Json(name = "overview") open val overview: String,
   @Json(name = "popularity") open val popularity: Double,
-  @Json(name = "poster_path") open val posterPath: String,
+  @Json(name = "poster_path") open val posterPath: String?,
   @Json(name = "vote_average") open val voteAverage: Double,
   @Json(name = "vote_count") open val voteCount: Int
 )
 
+/*
 @JsonClass(generateAdapter = true)
 data class SimilarTVShowDto(
-  @Json(name = "page") val page: Int,
-  @Json(name = "results") val results: List<SimilarTVShowItemDto>,
-  @Json(name = "total_pages") val totalPages: Int,
-  @Json(name = "total_results") val totalResults: Int
+  @field:Json(name = "page") val page: Int,
+  @field:Json(name = "results") val results: List<SimilarTVShowItemDto>,
+  @field:Json(name = "total_pages") val totalPages: Int,
+  @field:Json(name = "total_results") val totalResults: Int
 )
 
 @JsonClass(generateAdapter = true)
 data class SimilarTVShowItemDto(
-  @Json(name = "adult") val adult: Boolean,
+  @field:Json(name = "adult") val adult: Boolean,
   override val backdropPath: String,
   override val firstAirDate: String,
   override val genreIds: List<Int>,
@@ -65,4 +66,4 @@ data class SimilarTVShowItemDto(
   posterPath,
   voteAverage,
   voteCount
-)
+) */

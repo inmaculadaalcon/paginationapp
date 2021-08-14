@@ -13,10 +13,7 @@ class FleksyTestApplication: Application() {
       androidContext(applicationContext)
       modules(
         networkModule,
-        useCaseModule,
-        repositoryModule,
-        dataSourceModule,
-        viewModelModule
+        tvShowsModule
       )
     }
   }
