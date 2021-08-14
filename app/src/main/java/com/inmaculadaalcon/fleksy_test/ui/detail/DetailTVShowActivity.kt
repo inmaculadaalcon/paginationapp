@@ -54,7 +54,7 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>() {
     private fun drawDetails(details: DetailTVShow) {
         binding.title.text = details.name
         binding.overviewText.text = details.overview
-        Glide.with(this).load(BuildConfig.IMAGE_BASE_URL+details.backdropPath).fitCenter().into(binding.imagePoster)
+        Glide.with(this).load(BuildConfig.IMAGE_BASE_URL+details.backdropPath).into(binding.imagePoster)
     }
 
 }
