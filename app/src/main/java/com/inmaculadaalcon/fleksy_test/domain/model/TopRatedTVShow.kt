@@ -20,7 +20,8 @@ open class TVShow(
   open val popularity: Double,
   open val posterPath: String?,
   open val voteAverage: Double?,
-  open val voteCount: Int?
+  open val voteCount: Int?,
+  open val backgroundColor: Int? = null
 )
 
 data class SimilarTVShow(
