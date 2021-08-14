@@ -29,14 +29,16 @@
       <TextView
           android:id="@+id/tvshow_text"
           android:textSize="16sp"
-          android:textColor="@color/white"
-          tools:text= "kjanfgkjsdnfg"
+          android:textColor="@color/black"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toEndOf="@id/tvshow_image"
+          tools:text= "kjanfgkjsdnfg lasdnjkgnadg lkansdlajsndf"
           android:fontFamily="@font/montserrat"
           android:layout_width="wrap_content"
+          app:layout_constraintEnd_toEndOf="parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="20dp"
-          app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintStart_toEndOf="@+id/tvshow_image"
+          android:lines="4"
           />
       <ImageView
           android:id="@+id/star"
