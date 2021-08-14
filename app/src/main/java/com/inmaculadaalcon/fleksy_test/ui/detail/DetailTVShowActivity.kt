@@ -18,12 +18,8 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val backgroundColor = intent.getIntExtra(BACKGROUND_COLOR, R.drawable.background_blue)
-
-        if (backgroundColor != null) {
-            binding.root.background = ContextCompat.getDrawable(this, backgroundColor)
-        }
+        binding.root.background = ContextCompat.getDrawable(this, backgroundColor)
     }
 
     override val bindingInflater: (LayoutInflater) -> DetailTvshowActivityBinding
