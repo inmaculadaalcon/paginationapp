@@ -7,16 +7,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import arrow.core.right
-import arrow.core.rightIfNotNull
 import com.inmaculadaalcon.fleksy_test.databinding.ActivityMainBinding
-import com.inmaculadaalcon.fleksy_test.domain.model.TopRatedTVShow
 import com.inmaculadaalcon.fleksy_test.ui.adapter.TVShowsLoadStateAdapter
-import com.inmaculadaalcon.fleksy_test.ui.adapter.TopRatedTVShowAdapter
 import com.inmaculadaalcon.fleksy_test.ui.adapter.TopRatedTVShowsAdapter
 import com.inmaculadaalcon.fleksy_test.ui.base.BaseActivity
 import com.inmaculadaalcon.fleksy_test.ui.paging.asMergedLoadStates
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -42,14 +37,14 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(){
 
     binding.recyclerview.setHasFixedSize(true)
     binding.recyclerview.adapter = adapter.withLoadStateHeaderAndFooter(
-      header = TVShowsLoadStateAdapter{ adapter?.retry()},
-      footer = TVShowsLoadStateAdapter{ adapter?.retry()}
+      header = TVShowsLoadStateAdapter{ adapter.retry() },
+      footer = TVShowsLoadStateAdapter{ adapter.retry() }
     )
 
     val linearLayoutManager = LinearLayoutManager(this)
     binding.recyclerview.layoutManager = linearLayoutManager
 
-    adapter?.addLoadStateListener { loadState -> renderUI(loadState) }
+    adapter.addLoadStateListener { loadState -> renderUI(loadState) }
 
     lifecycleScope.launchWhenCreated {
       adapter.loadStateFlow
@@ -73,7 +68,6 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(){
                 adapter.submitData(tvshows)
             }
         }
-
     }
 
     private fun renderUI(loadState: CombinedLoadStates) {
