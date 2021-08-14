@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 
 import org.koin.core.component.inject
 
-class MainActivity() : BaseActivity<ActivityMainBinding>(){
+class MainActivity: BaseActivity<ActivityMainBinding>(){
 
   override val bindingInflater: (LayoutInflater) -> ActivityMainBinding
     get() = ActivityMainBinding::inflate

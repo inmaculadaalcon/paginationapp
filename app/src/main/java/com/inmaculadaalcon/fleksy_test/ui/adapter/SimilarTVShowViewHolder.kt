@@ -15,7 +15,6 @@ import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
 import com.inmaculadaalcon.fleksy_test.ui.detail.DetailTVShowActivity
 
 class SimilarTVShowViewHolder(val binding: SimilarTvShowsViewHolderBinding): RecyclerView.ViewHolder(binding.root) {
-    private val image: ImageView = binding.image
 
     private var similarTVShowItem: SimilarTVShowItem? = null
 
@@ -26,8 +25,9 @@ class SimilarTVShowViewHolder(val binding: SimilarTvShowsViewHolderBinding): Rec
 
     fun bind(tvShow: SimilarTVShowItem) {
         this.similarTVShowItem = tvShow
-        var url = BuildConfig.IMAGE_BASE_URL+ tvShow.backdropPath
-        Glide.with(itemView.context).load(BuildConfig.IMAGE_BASE_URL+ tvShow.backdropPath).into(image) //TODO Add a placeholder
+        val url = BuildConfig.IMAGE_BASE_URL+ tvShow.backdropPath
+        println("URL -> $url")
+        Glide.with(itemView.context).load(BuildConfig.IMAGE_BASE_URL+ tvShow.posterPath).into(binding.image) //TODO Add a placeholder
     }
 
 }

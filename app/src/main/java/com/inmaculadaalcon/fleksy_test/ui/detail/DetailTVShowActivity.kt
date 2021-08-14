@@ -59,7 +59,7 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>() {
             footer = TVShowsLoadStateAdapter{ adapter.retry() }
         )
 
-        val linearLayoutManager = LinearLayoutManager(this)
+        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.similarTvshows.layoutManager = linearLayoutManager
         adapter.addLoadStateListener { loadState -> renderUI(loadState) }
 
@@ -94,6 +94,8 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>() {
     private fun collectUIState() {
         lifecycleScope.launch {
             viewModel.getSimilarTVShows(tvShowId).collectLatest {
+                it ->
+                println("It -> $it.")
                 adapter.submitData(it)
             }
         }
@@ -112,13 +114,12 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>() {
         val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
 
         binding.similarTvshows.isVisible = !isListEmpty
-        binding.similarTvshows.isVisible = isListEmpty
 
         // Only shows the list if refresh succeeds.
         binding.similarTvshows.isVisible = loadState.source.refresh is LoadState.NotLoading
         // Show loading spinner during initial load or refresh.
         // Show the retry state if initial load or refresh fails.
-        binding.similarTvshows.isVisible = loadState.source.refresh is LoadState.Error
+       // binding.similarTvshows.isVisible = loadState.source.refresh is LoadState.Error
     }
 
 }
