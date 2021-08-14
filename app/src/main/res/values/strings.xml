@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">fleksy-test</string>
+    <string name="retry">retry</string>
+    <string name="tvshow_empty_message">There aren\'t TVShows to show up</string>
+    <string name="tvshow_btn_retry">retry</string>
+    <string name="tvshow_title">TopRated TV shows</string>
 </resources>

@@ -9,18 +9,18 @@ data class TopRatedTVShow (
 
 open class TVShow(
   open val backdropPath: String?,
-  open val firstAirDate: String,
-  open val genreIds: List<Int>,
+  open val firstAirDate: String?,
+  open val genreIds: List<Int>?,
   open val id: Int,
   open val name: String,
-  open val originCountry: List<String>,
-  open val originalLanguage: String,
-  open val originalName: String,
-  open val overview: String,
+  open val originCountry: List<String>?,
+  open val originalLanguage: String?,
+  open val originalName: String?,
+  open val overview: String?,
   open val popularity: Double,
-  open val posterPath: String,
-  open val voteAverage: Double,
-  open val voteCount: Int
+  open val posterPath: String?,
+  open val voteAverage: Double?,
+  open val voteCount: Int?
 )
 
 data class SimilarTVShow(
