@@ -36,18 +36,18 @@ data class SimilarTVShow(
 data class SimilarTVShowItem(
   val adult: Boolean,
   override val backdropPath: String?,
-  override val firstAirDate: String,
-  override val genreIds: List<Int>,
+  override val firstAirDate: String?,
+  override val genreIds: List<Int>?,
   override val id: Int,
   override val name: String,
-  override val originCountry: List<String>,
-  override val originalLanguage: String,
-  override val originalName: String,
-  override val overview: String,
+  override val originCountry: List<String>?,
+  override val originalLanguage: String?,
+  override val originalName: String?,
+  override val overview: String?,
   override val popularity: Double,
-  override val posterPath: String,
-  override val voteAverage: Double,
-  override val voteCount: Int
+  override val posterPath: String?,
+  override val voteAverage: Double?,
+  override val voteCount: Int?
 ): TVShow(backdropPath, firstAirDate,genreIds,id,name,originCountry,originalLanguage,originalName,overview,popularity,posterPath,voteAverage,voteCount, backgroundColor = R.drawable.background_green)
 
 
@@ -67,9 +67,9 @@ data class DetailTVShow(
   val networks: List<Network>,
   val numberOfEpisodes: Int,
   val numberOfSeasons: Int,
-  val originCountry: List<String>,
-  val originalLanguage: String,
-  val originalName: String,
+  val originCountry: List<String>?,
+  val originalLanguage: String?,
+  val originalName: String?,
   val overview: String,
   val popularity: Double,
   val posterPath: String?,
@@ -78,8 +78,8 @@ data class DetailTVShow(
   val status: String,
   val type: String,
   val tagline: String,
-  val voteAverage: Double,
-  val voteCount: Int
+  val voteAverage: Double?,
+  val voteCount: Int?
 )
 
 data class SpokenLanguage(
@@ -107,8 +107,8 @@ data class LastEpisodeToAir(
   val productionCode: String,
   val seasonNumber: Int,
   val stillPath: String?,
-  val voteAverage: Double,
-  val voteCount: Int
+  val voteAverage: Double?,
+  val voteCount: Int?
 )
 
 data class Network(

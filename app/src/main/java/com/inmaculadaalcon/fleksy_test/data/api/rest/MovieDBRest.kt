@@ -2,6 +2,7 @@ package com.inmaculadaalcon.fleksy_test.data.api.rest
 
 import com.inmaculadaalcon.fleksy_test.BuildConfig
 import com.inmaculadaalcon.fleksy_test.data.api.model.DetailTVShowDto
+import com.inmaculadaalcon.fleksy_test.data.api.model.SimilarTVShowItemDto
 import com.inmaculadaalcon.fleksy_test.data.api.model.TVShowDto
 import com.inmaculadaalcon.fleksy_test.data.api.model.TopRatedTvShowDto
 import com.inmaculadaalcon.fleksy_test.domain.ResponseItems
@@ -32,11 +33,11 @@ interface MovieDBRest {
    * @param page the page we are getting the data
    * */
 
-  /*@GET("${BuildConfig.BASE_URL}tv/{tv_id}/similar")
-  suspend fun getSimilarTVShows(@Query("api_key")apiKey: String,
-                                @Path("tv_id")tvId: Int,
+  @GET("tv/{tv_id}/similar")
+  suspend fun getSimilarTVShows(@Path("tv_id")tvId: Int,
                                 @Query("language")language: String,
-                                @Path("page")page:Int = 1): ResponseItems<SimilarTVShowItemDto>*/
+                                @Query("page")page:Int = 1): ResponseItems<SimilarTVShowItemDto>
+
 
     @GET("tv/{tv_id}")
     suspend fun getDetailTVShow(@Path("tv_id") tvShowId: Int, @Query("language") language: String): DetailTVShowDto

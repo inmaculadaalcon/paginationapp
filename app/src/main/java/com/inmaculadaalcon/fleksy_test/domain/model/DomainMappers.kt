@@ -17,6 +17,10 @@ fun DetailTVShowDto.toDomain(): DetailTVShow {
   popularity, posterPath, seasons.map {seasonDto ->  seasonDto.toDomain()}, spokenLanguages.map{spokenLanguageDto -> spokenLanguageDto.toDomain()}, status, type, tagline, voteAverage, voteCount)
 }
 
+fun SimilarTVShowItemDto.toDomain(): SimilarTVShowItem {
+  return SimilarTVShowItem(adult, backdropPath, firstAirDate, genreIds, id, name, originCountry, originalLanguage, originalName, overview, popularity, posterPath, voteAverage, voteCount)
+}
+
 fun SpokenLanguageDto.toDomain(): SpokenLanguage {
   return SpokenLanguage(englishName, iso6391, name)
 }

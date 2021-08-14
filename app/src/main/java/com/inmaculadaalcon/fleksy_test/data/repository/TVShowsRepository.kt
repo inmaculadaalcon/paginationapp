@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface TVShowsRepository {
   fun getTopRatedTVShows(): Flow<PagingData<TVShow>>
 
-  //fun getSimilarTVShows(): Flow<PagingData<SimilarTVShowItem>>
-
   suspend fun getDetailTVShow(tvShowId: Int): Flow<DetailTVShow>
+
+  fun getSimilarTVShows(tvShowId: Int): Flow<PagingData<SimilarTVShowItem>>
 }

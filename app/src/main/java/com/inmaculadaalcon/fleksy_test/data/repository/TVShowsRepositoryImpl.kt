@@ -29,9 +29,13 @@ class TVShowsRepositoryImpl(private val tvShowsDatasources: TVShowsDatasources )
         }
     }
 
-    /*override fun getSimilarTVShows(): Flow<PagingData<SimilarTVShowItem>> {
-        //TODO("Not yet implemented")
-    }*/
+    override fun getSimilarTVShows(tvShowId: Int): Flow<PagingData<SimilarTVShowItem>> {
+        return tvShowsDatasources.getSimilarTVShows(tvShowId).map {
+            pagingData ->  pagingData.map {
+               similarTVShowItem -> similarTVShowItem.toDomain()
+            }
+        }
+    }
 
 
 }
