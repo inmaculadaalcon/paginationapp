@@ -29,6 +29,7 @@ class TVShowViewHolder(val binding: TopRatedTvShowItemViewBinding): RecyclerView
         binding.card.background = ContextCompat.getDrawable(itemView.context, tvShow.backgroundColor)
         title.text = tvShow.name ?: "loading"
         average.text = tvShow.voteAverage.toString()
+        binding.tvshowOriginalnameText.text = tvShow.originalName
         Glide.with(itemView.context).load(BuildConfig.IMAGE_BASE_URL+tvShow.posterPath).into(image) //TODO Add a placeholder
     }
 

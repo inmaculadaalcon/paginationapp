@@ -1,8 +1,6 @@
 package com.inmaculadaalcon.fleksy_test.ui.base
 
 import com.inmaculadaalcon.fleksy_test.domain.model.DetailTVShow
-import com.inmaculadaalcon.fleksy_test.domain.model.DomainError
-import com.inmaculadaalcon.fleksy_test.domain.model.TopRatedTVShow
 
 sealed class BaseScreenState
 

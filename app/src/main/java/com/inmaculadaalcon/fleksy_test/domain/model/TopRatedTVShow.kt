@@ -1,14 +1,7 @@
 package com.inmaculadaalcon.fleksy_test.domain.model
 
 import com.inmaculadaalcon.fleksy_test.R
-import java.io.Serializable
 
-data class TopRatedTVShow (
-  val page: Int,
-  val results: List<TVShow>,
-  val totalPages: Int,
-  val totalResults: Int
-)
 @kotlinx.serialization.Serializable
 open class TVShow(
   open val backdropPath: String?,
@@ -27,13 +20,6 @@ open class TVShow(
   open val backgroundColor: Int
 )
 
-data class SimilarTVShow(
-  val page: Int,
-  val results: List<SimilarTVShowItem>,
-  val totalPages: Int,
-  val totalResults: Int
-)
-
 data class SimilarTVShowItem(
   val adult: Boolean,
   override val backdropPath: String?,
@@ -49,8 +35,7 @@ data class SimilarTVShowItem(
   override val posterPath: String?,
   override val voteAverage: Double?,
   override val voteCount: Int?
-): TVShow(backdropPath, firstAirDate,genreIds,id,name,originCountry,originalLanguage,originalName,overview,popularity,posterPath,voteAverage,voteCount, backgroundColor = R.drawable.background_green)
-
+): TVShow(backdropPath, firstAirDate,genreIds,id,name,originCountry,originalLanguage,originalName,overview,popularity,posterPath,voteAverage,voteCount, backgroundColor = R.drawable.background_blue)
 
 data class DetailTVShow(
   val backdropPath: String?,
