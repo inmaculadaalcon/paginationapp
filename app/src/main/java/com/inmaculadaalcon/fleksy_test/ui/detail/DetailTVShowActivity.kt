@@ -1,32 +1,20 @@
 package com.inmaculadaalcon.fleksy_test.ui.detail
 
 import ProminentLayoutManager
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import androidx.annotation.Px
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.core.view.size
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.*
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
-import com.bumptech.glide.Glide
-import com.inmaculadaalcon.fleksy_test.BuildConfig
-import com.inmaculadaalcon.fleksy_test.R
 import com.inmaculadaalcon.fleksy_test.databinding.DetailTvshowActivityBinding
-import com.inmaculadaalcon.fleksy_test.domain.model.DetailTVShow
 import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
 import com.inmaculadaalcon.fleksy_test.ui.adapter.SimilarTVShowsAdapter
 import com.inmaculadaalcon.fleksy_test.ui.adapter.TVShowsLoadStateAdapter
 import com.inmaculadaalcon.fleksy_test.ui.base.BaseActivity
 import com.inmaculadaalcon.fleksy_test.ui.paging.asMergedLoadStates
 import com.squareup.moshi.Moshi
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -99,7 +87,7 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
         lifecycleScope.launchWhenStarted {
             viewModel.screenState.collect { it ->
                 if (it != null){
-                    drawDetails(it.data)
+                   // drawDetails(it.data) -> This method was calling when I tried to make this with the detail service
                 }
             }
         }
@@ -119,11 +107,6 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
     override val bindingInflater: (LayoutInflater) -> DetailTvshowActivityBinding
         get() = DetailTvshowActivityBinding::inflate
 
-    private fun drawDetails(details: DetailTVShow) {
-        //binding.title.text = details.name
-        //binding.overviewText.text = details.overview
-       // Glide.with(this).load(BuildConfig.IMAGE_BASE_URL+details.backdropPath).into(binding.imagePoster)
-    }
 
     private fun renderUI(loadState: CombinedLoadStates) {
         val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
@@ -135,49 +118,6 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
         // Show loading spinner during initial load or refresh.
         // Show the retry state if initial load or refresh fails.
        // binding.similarTvshows.isVisible = loadState.source.refresh is LoadState.Error
-    }
-
-
-    /** Works best with a [LinearLayoutManager] in [LinearLayoutManager.HORIZONTAL] orientation */
-    class LinearHorizontalSpacingDecoration(@Px private val innerSpacing: Int) :
-        RecyclerView.ItemDecoration() {
-
-        override fun getItemOffsets(
-            outRect: Rect,
-            view: View,
-            parent: RecyclerView,
-            state: RecyclerView.State
-        ) {
-            super.getItemOffsets(outRect, view, parent, state)
-
-            val itemPosition = parent.getChildAdapterPosition(view)
-
-            outRect.left = if (itemPosition == 0) 0 else innerSpacing / 2
-            outRect.right = if (itemPosition == state.itemCount - 1) 0 else innerSpacing / 2
-        }
-    }
-    /** Offset the first and last items to center them */
-    class BoundsOffsetDecoration : RecyclerView.ItemDecoration() {
-        override fun getItemOffsets(
-            outRect: Rect,
-            view: View,
-            parent: RecyclerView,
-            state: RecyclerView.State
-        ) {
-            super.getItemOffsets(outRect, view, parent, state)
-
-            val itemPosition = parent.getChildAdapterPosition(view)
-
-            // It is crucial to refer to layoutParams.width (view.width is 0 at this time)!
-            val itemWidth = view.layoutParams.width
-            val offset = (parent.width - itemWidth) / 2
-
-            if (itemPosition == 0) {
-                outRect.left = offset
-            } else if (itemPosition == state.itemCount - 1) {
-                outRect.right = offset
-            }
-        }
     }
 
 }
