@@ -3,11 +3,14 @@ package com.inmaculadaalcon.fleksy_test.ui.detail
 import ProminentLayoutManager
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.AbsListView
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.inmaculadaalcon.fleksy_test.databinding.DetailTvshowActivityBinding
 import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
 import com.inmaculadaalcon.fleksy_test.ui.adapter.SimilarTVShowsAdapter
@@ -15,6 +18,8 @@ import com.inmaculadaalcon.fleksy_test.ui.adapter.TVShowsLoadStateAdapter
 import com.inmaculadaalcon.fleksy_test.ui.base.BaseActivity
 import com.inmaculadaalcon.fleksy_test.ui.paging.asMergedLoadStates
 import com.squareup.moshi.Moshi
+import kotlinx.android.synthetic.main.detail_tvshow_activity.*
+import kotlinx.android.synthetic.main.top_rated_tv_show_item_view.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -48,6 +53,10 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
 
         collectUIState()
 
+        binding.back.setOnClickListener {
+            finish()
+        }
+
         binding.tvShowsRecyclerview.setHasFixedSize(true)
         binding.tvShowsRecyclerview.adapter = adapter.withLoadStateHeaderAndFooter(
             header = TVShowsLoadStateAdapter { adapter.retry() },
@@ -59,6 +68,16 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
             binding.tvShowsRecyclerview.layoutManager = ProminentLayoutManager(this.context)
             snapHelper.attachToRecyclerView(this)
         }
+
+        binding.tvShowsRecyclerview.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState === RecyclerView.SCROLL_STATE_IDLE) {
+                    val position: Int = (binding.tvShowsRecyclerview.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                    getItemObject(position)
+                }
+            }
+        })
 
         adapter.addLoadStateListener { loadState -> renderUI(loadState) }
 
@@ -91,6 +110,13 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
                 }
             }
         }
+    }
+
+    private fun getItemObject(position: Int): TVShow {
+       val tvShow =  adapter.getItemObject(position)
+        //Call to get the similar tvshows
+        println("TVSHOW-<>>>>>> ${tvShow.name}")
+        return tvShow
     }
 
     private fun collectUIState() {

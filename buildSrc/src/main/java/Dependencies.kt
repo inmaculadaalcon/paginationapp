@@ -118,5 +118,4 @@ object RecyclerViewDependencies {
 object PagingDependencies {
   const val paging = "androidx.paging:paging-common-ktx:${Versions.Paging.PAGING}"
   const val pagingRuntime = "androidx.paging:paging-runtime-ktx:${Versions.Paging.PAGING}"
-
 }
