@@ -38,7 +38,7 @@ internal class TVShowDataSourceImpl(private val movieDBRest: MovieDBRest): TVSho
             movieDBRest.getDetailTVShow(tvShowId, language = "en-US"))
     }
 
-    override fun getSimilarTVShows(showId: Int): Flow<PagingData<SimilarTVShowItemDto>> {
+    override fun getSimilarTVShows(showId: Int): Flow<PagingData<TVShowDto>> {
         return Pager(
             config = PagingConfig(
                 pageSize = SERVICE_PAGE_SIZE,

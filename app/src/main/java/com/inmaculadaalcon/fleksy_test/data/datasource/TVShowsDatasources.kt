@@ -13,5 +13,5 @@ interface TVShowsDatasources {
 
     suspend fun getDetailTVShow(tvShowId: Int): Flow<DetailTVShowDto>
 
-    fun getSimilarTVShows(showId: Int): Flow<PagingData<SimilarTVShowItemDto>>
+    fun getSimilarTVShows(showId: Int): Flow<PagingData<TVShowDto>>
 }

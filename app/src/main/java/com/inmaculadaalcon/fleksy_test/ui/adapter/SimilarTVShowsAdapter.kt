@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.inmaculadaalcon.fleksy_test.databinding.SimilarTvShowsViewHolderBinding
 import com.inmaculadaalcon.fleksy_test.domain.model.SimilarTVShowItem
+import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
 
-class SimilarTVShowsAdapter: PagingDataAdapter<SimilarTVShowItem, SimilarTVShowViewHolder>(SimilarTVShowDiffCallback()){
+class SimilarTVShowsAdapter: PagingDataAdapter<TVShow, SimilarTVShowViewHolder>(SimilarTVShowDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimilarTVShowViewHolder {
         val holder = SimilarTVShowViewHolder(
@@ -18,6 +19,6 @@ class SimilarTVShowsAdapter: PagingDataAdapter<SimilarTVShowItem, SimilarTVShowV
     }
 
     override fun onBindViewHolder(holder: SimilarTVShowViewHolder, position: Int) {
-        holder.bind(getItem(position) as SimilarTVShowItem)
+        holder.bind(getItem(position) as TVShow)
     }
 }

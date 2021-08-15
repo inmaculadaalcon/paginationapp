@@ -3,6 +3,7 @@ package com.inmaculadaalcon.fleksy_test.data.repository
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.inmaculadaalcon.fleksy_test.data.api.extensions.mapResponse
+import com.inmaculadaalcon.fleksy_test.data.api.model.TVShowDto
 import com.inmaculadaalcon.fleksy_test.data.datasource.TVShowsDatasources
 import com.inmaculadaalcon.fleksy_test.domain.model.DetailTVShow
 import com.inmaculadaalcon.fleksy_test.domain.model.SimilarTVShowItem
@@ -29,7 +30,7 @@ class TVShowsRepositoryImpl(private val tvShowsDatasources: TVShowsDatasources )
         }
     }
 
-    override fun getSimilarTVShows(tvShowId: Int): Flow<PagingData<SimilarTVShowItem>> {
+    override fun getSimilarTVShows(tvShowId: Int): Flow<PagingData<TVShow>> {
         return tvShowsDatasources.getSimilarTVShows(tvShowId).map {
             pagingData ->  pagingData.map {
                similarTVShowItem -> similarTVShowItem.toDomain()

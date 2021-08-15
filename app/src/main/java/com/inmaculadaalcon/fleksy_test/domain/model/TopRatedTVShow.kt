@@ -1,6 +1,7 @@
 package com.inmaculadaalcon.fleksy_test.domain.model
 
 import com.inmaculadaalcon.fleksy_test.R
+import java.io.Serializable
 
 data class TopRatedTVShow (
   val page: Int,
@@ -8,7 +9,7 @@ data class TopRatedTVShow (
   val totalPages: Int,
   val totalResults: Int
 )
-
+@kotlinx.serialization.Serializable
 open class TVShow(
   open val backdropPath: String?,
   open val firstAirDate: String?,

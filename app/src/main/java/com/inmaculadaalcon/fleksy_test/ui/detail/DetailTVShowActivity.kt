@@ -2,10 +2,8 @@ package com.inmaculadaalcon.fleksy_test.ui.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
@@ -13,17 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.inmaculadaalcon.fleksy_test.BuildConfig
 import com.inmaculadaalcon.fleksy_test.R
-import com.inmaculadaalcon.fleksy_test.databinding.ActivityMainBinding
 import com.inmaculadaalcon.fleksy_test.databinding.DetailTvshowActivityBinding
 import com.inmaculadaalcon.fleksy_test.domain.model.DetailTVShow
+import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
 import com.inmaculadaalcon.fleksy_test.ui.adapter.SimilarTVShowsAdapter
 import com.inmaculadaalcon.fleksy_test.ui.adapter.TVShowsLoadStateAdapter
-import com.inmaculadaalcon.fleksy_test.ui.adapter.TopRatedTVShowsAdapter
 import com.inmaculadaalcon.fleksy_test.ui.base.BaseActivity
-import com.inmaculadaalcon.fleksy_test.ui.main.TopRatedTVShowsListViewModel
 import com.inmaculadaalcon.fleksy_test.ui.paging.asMergedLoadStates
-import kotlinx.android.synthetic.main.detail_tvshow_activity.*
-import kotlinx.coroutines.Dispatchers
+import com.squareup.moshi.Moshi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -32,25 +27,29 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>() {
+class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinComponent {
 
     companion object {
         const val BACKGROUND_COLOR = "backgroundcolor"
         const val TV_SHOW_ID = "tvshowId"
+        const val TV_SHOW = "tvshow"
     }
 
     private val viewModel: DetailTVShowViewModel by inject()
+    private val moshi: Moshi by inject()
 
     private val adapter = SimilarTVShowsAdapter()
 
     private var tvShowId: Int = 0
+    private var tvShow: TVShow? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val backgroundColor = intent.getIntExtra(BACKGROUND_COLOR, R.drawable.background_blue)
         tvShowId = intent.getIntExtra(TV_SHOW_ID, 0)
         binding.root.background = ContextCompat.getDrawable(this, backgroundColor)
-
+        val jsonTVShow = intent.getStringExtra(TV_SHOW)
+        val tvShow = moshi.adapter(TVShow::class.java).fromJson(jsonTVShow!!)
         collectUIState()
 
         binding.similarTvshows.setHasFixedSize(true)
@@ -76,7 +75,7 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>() {
                 // Scroll to top is synchronous with UI updates, even if remote load was triggered.
                 .collect { binding.similarTvshows.scrollToPosition(0) }
         }
-        viewModel.getSimilarTVShows(tvShowId)
+        viewModel.getSimilarTVShows(tvShowId, currentTVShow = tvShow)
 
         lifecycleScope.launch {
             viewModel.getDetailTVShow(tvShowId)
@@ -93,7 +92,7 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>() {
 
     private fun collectUIState() {
         lifecycleScope.launch {
-            viewModel.getSimilarTVShows(tvShowId).collectLatest {
+            viewModel.getSimilarTVShows(tvShowId, currentTVShow = tvShow).collectLatest {
                 it ->
                 println("It -> $it.")
                 adapter.submitData(it)

@@ -46,7 +46,7 @@ dependencies {
     implementation(MaterialDependencies.material)
     implementation 'androidx.paging:paging-common-ktx:3.0.1'
     implementation "androidx.paging:paging-runtime-ktx:3.0.1" // For Kotlin use paging-runtime-ktx
-
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 
   //Testing libraries
     testImplementation(TestDependencies.junitTestImplementation)

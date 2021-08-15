@@ -36,7 +36,7 @@ interface MovieDBRest {
   @GET("tv/{tv_id}/similar")
   suspend fun getSimilarTVShows(@Path("tv_id")tvId: Int,
                                 @Query("language")language: String,
-                                @Query("page")page:Int = 1): ResponseItems<SimilarTVShowItemDto>
+                                @Query("page")page:Int = 1): ResponseItems<TVShowDto>
 
 
     @GET("tv/{tv_id}")

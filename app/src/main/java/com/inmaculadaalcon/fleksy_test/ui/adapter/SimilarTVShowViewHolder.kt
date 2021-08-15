@@ -16,14 +16,14 @@ import com.inmaculadaalcon.fleksy_test.ui.detail.DetailTVShowActivity
 
 class SimilarTVShowViewHolder(val binding: SimilarTvShowsViewHolderBinding): RecyclerView.ViewHolder(binding.root) {
 
-    private var similarTVShowItem: SimilarTVShowItem? = null
+    private var similarTVShowItem: TVShow? = null
 
     init {
         binding.root.setOnClickListener{
         }
     }
 
-    fun bind(tvShow: SimilarTVShowItem) {
+    fun bind(tvShow: TVShow) {
         this.similarTVShowItem = tvShow
         val url = BuildConfig.IMAGE_BASE_URL+ tvShow.backdropPath
         println("URL -> $url")

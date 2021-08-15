@@ -8,6 +8,7 @@ import androidx.paging.map
 import com.inmaculadaalcon.fleksy_test.data.repository.TVShowsRepository
 import com.inmaculadaalcon.fleksy_test.domain.model.DetailTVShow
 import com.inmaculadaalcon.fleksy_test.domain.model.SimilarTVShowItem
+import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
 import com.inmaculadaalcon.fleksy_test.ui.base.TVShowDetailScreenState
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -26,11 +27,11 @@ class DetailTVShowViewModel(private val tvShowsRepository: TVShowsRepository): V
         }
     }
 
-    fun getSimilarTVShows(tvShowId: Int): Flow<PagingData<SimilarTVShowItem>> {
+    fun getSimilarTVShows(tvShowId: Int, currentTVShow: TVShow? = null): Flow<PagingData<TVShow>> {
         return tvShowsRepository.getSimilarTVShows(tvShowId).map {
             pagingData ->
             pagingData.map {
-                it
+                 it
             }
         }.cachedIn(viewModelScope)
     }
