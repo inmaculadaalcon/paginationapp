@@ -4,10 +4,13 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.inmaculadaalcon.fleksy_test.data.api.model.SimilarTVShowItemDto
 import com.inmaculadaalcon.fleksy_test.data.api.model.TVShowDto
+import com.inmaculadaalcon.fleksy_test.domain.ResponseItems
+import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
+import com.inmaculadaalcon.fleksy_test.domain.model.toDto
 import retrofit2.HttpException
 import java.io.IOException
 
-class SimilarTVShowsPagingSource(private val rest: MovieDBRest, private val showId: Int): PagingSource<Int, TVShowDto>() {
+class SimilarTVShowsPagingSource(private val rest: MovieDBRest, private val showId: Int, private val tvShow: TVShow): PagingSource<Int, TVShowDto>() {
 
     companion object {
         const val FIRST_PAGE_INDEX = 1
@@ -24,8 +27,10 @@ class SimilarTVShowsPagingSource(private val rest: MovieDBRest, private val show
         return try {
             val response = rest.getSimilarTVShows(tvId= showId, language = "en-US", page = pageIndex)
             val tvshows = response.results
+            val mutable = tvshows.toMutableList()
+            mutable.add(0, tvShow.toDto())
             LoadResult.Page(
-                data = tvshows,
+                data = mutable.toList(),
                 prevKey =  if (pageIndex == FIRST_PAGE_INDEX) null else pageIndex,
                 nextKey = pageIndex + 1
             )

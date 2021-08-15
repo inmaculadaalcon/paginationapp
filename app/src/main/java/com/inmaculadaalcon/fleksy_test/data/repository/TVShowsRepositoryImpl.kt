@@ -30,8 +30,8 @@ class TVShowsRepositoryImpl(private val tvShowsDatasources: TVShowsDatasources )
         }
     }
 
-    override fun getSimilarTVShows(tvShowId: Int): Flow<PagingData<TVShow>> {
-        return tvShowsDatasources.getSimilarTVShows(tvShowId).map {
+    override fun getSimilarTVShows(tvShowId: Int, tvShow: TVShow): Flow<PagingData<TVShow>> {
+        return tvShowsDatasources.getSimilarTVShows(tvShowId, tvShow).map {
             pagingData ->  pagingData.map {
                similarTVShowItem -> similarTVShowItem.toDomain()
             }

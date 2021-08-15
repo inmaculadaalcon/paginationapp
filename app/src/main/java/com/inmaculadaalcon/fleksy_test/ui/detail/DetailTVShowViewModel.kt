@@ -26,8 +26,8 @@ class DetailTVShowViewModel(private val tvShowsRepository: TVShowsRepository): V
         }
     }
 
-    fun getSimilarTVShows(tvShowId: Int, currentTVShow: TVShow? = null): Flow<PagingData<TVShow>> {
-        return tvShowsRepository.getSimilarTVShows(tvShowId).map {
+    fun getSimilarTVShows(tvShowId: Int, currentTVShow: TVShow): Flow<PagingData<TVShow>> {
+        return tvShowsRepository.getSimilarTVShows(tvShowId, currentTVShow).map {
             pagingData ->
             pagingData.map {
                  it

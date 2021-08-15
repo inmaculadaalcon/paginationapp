@@ -8,9 +8,9 @@ import android.view.View
 import androidx.annotation.Px
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.view.size
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.CombinedLoadStates
-import androidx.paging.LoadState
+import androidx.paging.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +26,7 @@ import com.inmaculadaalcon.fleksy_test.ui.adapter.TVShowsLoadStateAdapter
 import com.inmaculadaalcon.fleksy_test.ui.base.BaseActivity
 import com.inmaculadaalcon.fleksy_test.ui.paging.asMergedLoadStates
 import com.squareup.moshi.Moshi
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -53,17 +54,16 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val backgroundColor = intent.getIntExtra(BACKGROUND_COLOR, R.drawable.background_blue)
         tvShowId = intent.getIntExtra(TV_SHOW_ID, 0)
-        binding.root.background = ContextCompat.getDrawable(this, backgroundColor)
         val jsonTVShow = intent.getStringExtra(TV_SHOW)
-        val tvShow = moshi.adapter(TVShow::class.java).fromJson(jsonTVShow!!)
+        tvShow = moshi.adapter(TVShow::class.java).fromJson(jsonTVShow!!)
+
         collectUIState()
 
         binding.tvShowsRecyclerview.setHasFixedSize(true)
         binding.tvShowsRecyclerview.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = TVShowsLoadStateAdapter{ adapter.retry() },
-            footer = TVShowsLoadStateAdapter{ adapter.retry() }
+            header = TVShowsLoadStateAdapter { adapter.retry() },
+            footer = TVShowsLoadStateAdapter { adapter.retry() }
         )
 
         with(binding.tvShowsRecyclerview) {
@@ -87,7 +87,10 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
                 // Scroll to top is synchronous with UI updates, even if remote load was triggered.
                 .collect { binding.tvShowsRecyclerview.scrollToPosition(0) }
         }
-        viewModel.getSimilarTVShows(tvShowId, currentTVShow = tvShow)
+
+        if (tvShow != null) {
+            viewModel.getSimilarTVShows(tvShowId= tvShowId, tvShow!!)
+        }
 
         lifecycleScope.launch {
             viewModel.getDetailTVShow(tvShowId)
@@ -104,10 +107,11 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
 
     private fun collectUIState() {
         lifecycleScope.launch {
-            viewModel.getSimilarTVShows(tvShowId, currentTVShow = tvShow).collectLatest {
-                it ->
-                println("It -> $it.")
-                adapter.submitData(it)
+            tvShow?.let {
+                viewModel.getSimilarTVShows(tvShowId, it).collectLatest { it ->
+                    println("It -> $it.")
+                    adapter.submitData(it)
+                }
             }
         }
     }

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.inmaculadaalcon.fleksy_test.BuildConfig
+import com.inmaculadaalcon.fleksy_test.R
 import com.inmaculadaalcon.fleksy_test.databinding.SimilarTvShowsViewHolderBinding
 import com.inmaculadaalcon.fleksy_test.databinding.TopRatedTvShowItemViewBinding
 import com.inmaculadaalcon.fleksy_test.domain.model.SimilarTVShow
@@ -44,9 +45,12 @@ class SimilarTVShowViewHolder(val binding: SimilarTvShowsViewHolderBinding): Rec
     }
 
     fun bind(tvShow: TVShow) {
+        binding.root.background = ContextCompat.getDrawable(itemView.context, tvShow.backgroundColor)
         this.similarTVShowItem = tvShow
         val url = BuildConfig.IMAGE_BASE_URL+ tvShow.backdropPath
         println("URl -> $url")
+        binding.title.text = tvShow.name
+        binding.overviewText.text = tvShow.overview
         Glide.with(itemView.context).load(url).into(binding.imagePoster) //TODO Add a placeholder
     }
 

@@ -8,11 +8,11 @@
         android:id="@+id/image_poster"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/background_purple"
         android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="300dp"/>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/title_background"
         android:layout_width="match_parent"
         app:layout_constraintTop_toBottomOf="@id/image_poster"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,11 +38,10 @@
             android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/details"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_poster"
+        app:layout_constraintTop_toBottomOf="@+id/title_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView

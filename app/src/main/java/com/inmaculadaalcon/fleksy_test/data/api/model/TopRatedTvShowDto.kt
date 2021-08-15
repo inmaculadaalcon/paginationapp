@@ -11,7 +11,7 @@ data class TopRatedTvShowDto(
   @Json(name = "total_results") val totalResults: Int
 )
 @JsonClass(generateAdapter = true)
-open class TVShowDto(
+data class TVShowDto(
   @Json(name = "backdrop_path") open val backdropPath: String?,
   @Json(name = "first_air_date") open val firstAirDate: String?,
   @Json(name = "genre_ids") open val genreIds: List<Int>?,
@@ -20,7 +20,7 @@ open class TVShowDto(
   @Json(name = "origin_country") open val originCountry: List<String>?,
   @Json(name = "original_language") open val originalLanguage: String?,
   @Json(name = "original_name") open val originalName: String?,
-  @Json(name = "overview") open val overview: String,
+  @Json(name = "overview") open val overview: String?,
   @Json(name = "popularity") open val popularity: Double,
   @Json(name = "poster_path") open val posterPath: String?,
   @Json(name = "vote_average") open val voteAverage: Double?,

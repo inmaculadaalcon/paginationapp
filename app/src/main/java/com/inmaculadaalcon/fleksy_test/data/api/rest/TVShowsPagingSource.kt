@@ -3,7 +3,7 @@ package com.inmaculadaalcon.fleksy_test.data.api.rest
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.inmaculadaalcon.fleksy_test.data.api.model.TVShowDto
-import com.inmaculadaalcon.fleksy_test.data.datasource.TVShowDataSourceImpl.Companion.SERVICE_PAGE_SIZE
+import com.inmaculadaalcon.fleksy_test.di.tvShowsModule
 import retrofit2.HttpException
 import java.io.IOException
 

@@ -2,6 +2,7 @@ package com.inmaculadaalcon.fleksy_test.domain.model
 
 import com.inmaculadaalcon.fleksy_test.R
 import com.inmaculadaalcon.fleksy_test.data.api.model.*
+import com.squareup.moshi.Json
 import java.util.*
 
 var backgrounds = listOf(R.drawable.background, R.drawable.background_blue, R.drawable.background_green, R.drawable.background_orange, R.drawable.background_pink, R.drawable.background_purple)
@@ -19,6 +20,10 @@ fun DetailTVShowDto.toDomain(): DetailTVShow {
 
 fun SimilarTVShowItemDto.toDomain(): SimilarTVShowItem {
   return SimilarTVShowItem(adult, backdropPath, firstAirDate, genreIds, id, name, originCountry, originalLanguage, originalName, overview, popularity, posterPath, voteAverage, voteCount)
+}
+
+fun TVShow.toDto(): TVShowDto{
+  return TVShowDto(backdropPath, firstAirDate, genreIds, id, name, originCountry, originalLanguage, originalName, overview, popularity, posterPath, voteAverage, voteCount)
 }
 
 fun SpokenLanguageDto.toDomain(): SpokenLanguage {
