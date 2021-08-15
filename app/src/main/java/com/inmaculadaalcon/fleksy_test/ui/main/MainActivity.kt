@@ -41,6 +41,9 @@ class MainActivity: BaseActivity<ActivityMainBinding>(){
       footer = TVShowsLoadStateAdapter{ adapter.retry() }
     )
 
+
+    binding.retryButton.setOnClickListener { adapter?.retry() }
+
     val linearLayoutManager = LinearLayoutManager(this)
     binding.recyclerview.layoutManager = linearLayoutManager
 
@@ -81,7 +84,7 @@ class MainActivity: BaseActivity<ActivityMainBinding>(){
     // Show loading spinner during initial load or refresh.
     binding.progressbarTvshows.isVisible = loadState.source.refresh is LoadState.Loading
     // Show the retry state if initial load or refresh fails.
-    binding.btnMoviesRetry.isVisible = loadState.source.refresh is LoadState.Error
+    binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
   }
 
 }
