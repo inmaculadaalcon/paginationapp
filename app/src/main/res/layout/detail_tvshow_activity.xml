@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <ImageView
+            android:id="@+id/back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="10dp"
+            android:src="@drawable/outline_arrow_back_24"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tv_shows_recyclerview"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/similar_tv_shows_view_holder"
+        android:orientation="horizontal"
+        tools:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+<!--
     <ImageView
         android:id="@+id/image_poster"
         android:scaleType="fitXY"
@@ -13,15 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"/>
 
-    <ImageView
-        android:id="@+id/back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="10dp"
-        android:src="@drawable/outline_arrow_back_24"
-        android:layout_margin="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         app:layout_constraintBottom_toBottomOf="@id/image_poster"
@@ -77,5 +96,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="120dp"/>
+        android:layout_height="120dp"/> -->
 </androidx.constraintlayout.widget.ConstraintLayout>

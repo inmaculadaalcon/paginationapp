@@ -7,7 +7,6 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.inmaculadaalcon.fleksy_test.data.repository.TVShowsRepository
 import com.inmaculadaalcon.fleksy_test.domain.model.DetailTVShow
-import com.inmaculadaalcon.fleksy_test.domain.model.SimilarTVShowItem
 import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
 import com.inmaculadaalcon.fleksy_test.ui.base.TVShowDetailScreenState
 import kotlinx.coroutines.flow.*

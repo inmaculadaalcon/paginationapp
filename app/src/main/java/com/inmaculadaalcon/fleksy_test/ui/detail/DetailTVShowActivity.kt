@@ -1,13 +1,20 @@
 package com.inmaculadaalcon.fleksy_test.ui.detail
 
+import ProminentLayoutManager
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
+import androidx.annotation.Px
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide
 import com.inmaculadaalcon.fleksy_test.BuildConfig
 import com.inmaculadaalcon.fleksy_test.R
@@ -39,6 +46,7 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
     private val moshi: Moshi by inject()
 
     private val adapter = SimilarTVShowsAdapter()
+    val snapHelper = PagerSnapHelper()
 
     private var tvShowId: Int = 0
     private var tvShow: TVShow? = null
@@ -52,14 +60,18 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
         val tvShow = moshi.adapter(TVShow::class.java).fromJson(jsonTVShow!!)
         collectUIState()
 
-        binding.similarTvshows.setHasFixedSize(true)
-        binding.similarTvshows.adapter = adapter.withLoadStateHeaderAndFooter(
+        binding.tvShowsRecyclerview.setHasFixedSize(true)
+        binding.tvShowsRecyclerview.adapter = adapter.withLoadStateHeaderAndFooter(
             header = TVShowsLoadStateAdapter{ adapter.retry() },
             footer = TVShowsLoadStateAdapter{ adapter.retry() }
         )
 
-        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.similarTvshows.layoutManager = linearLayoutManager
+        with(binding.tvShowsRecyclerview) {
+            setItemViewCacheSize(4)
+            binding.tvShowsRecyclerview.layoutManager = ProminentLayoutManager(this.context)
+            snapHelper.attachToRecyclerView(this)
+        }
+
         adapter.addLoadStateListener { loadState -> renderUI(loadState) }
 
         lifecycleScope.launchWhenCreated {
@@ -73,7 +85,7 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
                 // Only react to cases where REFRESH completes i.e., NotLoading.
                 .filter { it.refresh is LoadState.NotLoading }
                 // Scroll to top is synchronous with UI updates, even if remote load was triggered.
-                .collect { binding.similarTvshows.scrollToPosition(0) }
+                .collect { binding.tvShowsRecyclerview.scrollToPosition(0) }
         }
         viewModel.getSimilarTVShows(tvShowId, currentTVShow = tvShow)
 
@@ -84,7 +96,7 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
         lifecycleScope.launchWhenStarted {
             viewModel.screenState.collect { it ->
                 if (it != null){
-                    drawDetails(it.data as DetailTVShow)
+                    drawDetails(it.data)
                 }
             }
         }
@@ -104,21 +116,64 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
         get() = DetailTvshowActivityBinding::inflate
 
     private fun drawDetails(details: DetailTVShow) {
-        binding.title.text = details.name
-        binding.overviewText.text = details.overview
-        Glide.with(this).load(BuildConfig.IMAGE_BASE_URL+details.backdropPath).into(binding.imagePoster)
+        //binding.title.text = details.name
+        //binding.overviewText.text = details.overview
+       // Glide.with(this).load(BuildConfig.IMAGE_BASE_URL+details.backdropPath).into(binding.imagePoster)
     }
 
     private fun renderUI(loadState: CombinedLoadStates) {
         val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
 
-        binding.similarTvshows.isVisible = !isListEmpty
+        binding.tvShowsRecyclerview.isVisible = !isListEmpty
 
         // Only shows the list if refresh succeeds.
-        binding.similarTvshows.isVisible = loadState.source.refresh is LoadState.NotLoading
+        binding.tvShowsRecyclerview.isVisible = loadState.source.refresh is LoadState.NotLoading
         // Show loading spinner during initial load or refresh.
         // Show the retry state if initial load or refresh fails.
        // binding.similarTvshows.isVisible = loadState.source.refresh is LoadState.Error
+    }
+
+
+    /** Works best with a [LinearLayoutManager] in [LinearLayoutManager.HORIZONTAL] orientation */
+    class LinearHorizontalSpacingDecoration(@Px private val innerSpacing: Int) :
+        RecyclerView.ItemDecoration() {
+
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            super.getItemOffsets(outRect, view, parent, state)
+
+            val itemPosition = parent.getChildAdapterPosition(view)
+
+            outRect.left = if (itemPosition == 0) 0 else innerSpacing / 2
+            outRect.right = if (itemPosition == state.itemCount - 1) 0 else innerSpacing / 2
+        }
+    }
+    /** Offset the first and last items to center them */
+    class BoundsOffsetDecoration : RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            super.getItemOffsets(outRect, view, parent, state)
+
+            val itemPosition = parent.getChildAdapterPosition(view)
+
+            // It is crucial to refer to layoutParams.width (view.width is 0 at this time)!
+            val itemWidth = view.layoutParams.width
+            val offset = (parent.width - itemWidth) / 2
+
+            if (itemPosition == 0) {
+                outRect.left = offset
+            } else if (itemPosition == state.itemCount - 1) {
+                outRect.right = offset
+            }
+        }
     }
 
 }

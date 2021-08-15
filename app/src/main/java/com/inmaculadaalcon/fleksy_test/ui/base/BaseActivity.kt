@@ -1,7 +1,5 @@
 package com.inmaculadaalcon.fleksy_test.ui.base
 
-import android.content.Context
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
