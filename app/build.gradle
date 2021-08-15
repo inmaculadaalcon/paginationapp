@@ -87,6 +87,8 @@ dependencies {
     implementation(LifeCycleDependencies.lifecycle_runtime)
     implementation(LifeCycleDependencies.lifecycle_viewmodel)
 
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
+
    //RecyclerView Androidx
     implementation(RecyclerViewDependencies.recyclerview)
 }
