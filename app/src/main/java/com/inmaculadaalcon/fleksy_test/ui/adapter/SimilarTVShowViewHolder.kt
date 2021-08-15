@@ -20,7 +20,7 @@ class SimilarTVShowViewHolder(val binding: SimilarTvShowsViewHolderBinding): Rec
         }
     }
 
-    fun RecyclerView.smoothScrollToCenteredPosition(position: Int) {
+    private fun RecyclerView.smoothScrollToCenteredPosition(position: Int) {
         val smoothScroller = object : LinearSmoothScroller(context) {
 
             override fun calculateDxToMakeVisible(view: View?,
@@ -40,7 +40,6 @@ class SimilarTVShowViewHolder(val binding: SimilarTvShowsViewHolderBinding): Rec
         this.similarTVShowItem = tvShow
         binding.root.background = ContextCompat.getDrawable(itemView.context, tvShow.backgroundColor)
         val url = BuildConfig.IMAGE_BASE_URL+ tvShow.backdropPath
-        println("URl -> $url")
         binding.title.text = tvShow.name
         binding.overviewText.text = tvShow.overview
         Glide.with(itemView.context).load(url).into(binding.imagePoster) //TODO Add a placeholder
