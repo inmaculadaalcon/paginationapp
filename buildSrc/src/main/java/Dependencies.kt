@@ -13,6 +13,8 @@ object Versions {
   const val okhttp = "4.9.1"
   const val retrofit = "2.9.0"
   const val retrofit_conv_moshi = "2.4.0"
+  const val serialization = "1.2.2"
+  const val mockWebServer = "4.9.1"
 
   const val arrow = "0.10.5"
 
@@ -26,6 +28,9 @@ object Versions {
   }
   object RecyclerView {
     const val RECYCLER = "1.2.1"
+  }
+  object Paging {
+    const val PAGING = "3.0.1"
   }
 }
 
@@ -91,6 +96,14 @@ object CoroutinesDependencies {
   const val coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.Coroutines.ANDROID}"
 }
 
+object KotlinDependencies {
+  const val kotlinserialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}"
+}
+
+object MockDependencies {
+  const val mockWebServer = "\"com.squareup.okhttp3:mockwebserver:${Versions.mockWebServer}"
+}
+
 object LifeCycleDependencies {
   const val lifecycle_compiler = "androidx.lifecycle:lifecycle-compiler:${Versions.LyfeCycle.LIFECYCLE}"
   const val lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.LyfeCycle.LIFECYCLE}"
@@ -100,4 +113,10 @@ object LifeCycleDependencies {
 
 object RecyclerViewDependencies {
   const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.RecyclerView.RECYCLER}"
+}
+
+object PagingDependencies {
+  const val paging = "androidx.paging:paging-common-ktx:${Versions.Paging.PAGING}"
+  const val pagingRuntime = "androidx.paging:paging-runtime-ktx:${Versions.Paging.PAGING}"
+
 }

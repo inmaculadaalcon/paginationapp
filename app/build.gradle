@@ -43,10 +43,12 @@ android {
 dependencies {
     implementation (AndroidxDependencies.corektx)
     implementation (AndroidxDependencies.appcompat)
-    implementation(MaterialDependencies.material)
-    implementation 'androidx.paging:paging-common-ktx:3.0.1'
-    implementation "androidx.paging:paging-runtime-ktx:3.0.1" // For Kotlin use paging-runtime-ktx
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
+    implementation (MaterialDependencies.material)
+    implementation (PagingDependencies.paging)
+    implementation (PagingDependencies.pagingRuntime)
+    implementation (KotlinDependencies.kotlinserialization)
+
+    testImplementation(MockDependencies.mockWebServer)
 
   //Testing libraries
     testImplementation(TestDependencies.junitTestImplementation)
@@ -86,8 +88,6 @@ dependencies {
     implementation(LifeCycleDependencies.lifecycle_livedata)
     implementation(LifeCycleDependencies.lifecycle_runtime)
     implementation(LifeCycleDependencies.lifecycle_viewmodel)
-
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
 
    //RecyclerView Androidx
     implementation(RecyclerViewDependencies.recyclerview)
