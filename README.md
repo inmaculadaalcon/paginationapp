@@ -22,6 +22,25 @@ tv shows
 # Development Environment
 This app is written entirely in Kotlin and uses the Gradle build system
 
-To build the app use the `gradle build` command or use "Import Project" in Android Studio. 
 
+### Libraries
 
+- Application entirely written in [Kotlin](https://kotlinlang.org)
+- Asynchronous processing using [Coroutines](https://kotlin.github.io/kotlinx.coroutines/)
+- Uses [Koin](https://github.com/InsertKoinIO/koin) for dependency injection
+- [Glide][glide] for image loading
+- Uses [Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) which one has the following
+features and I found as the best solution for the problem indicated.
+  - In-memory caching for your paged data. This ensures that your app uses system resources efficiently while working with paged data.
+  - Built-in request deduplication, ensuring that your app uses network bandwidth and system resources efficiently.
+  - Configurable RecyclerView adapters that automatically request data as the user scrolls toward the end of the loaded data.
+  - First-class support for Kotlin coroutines and Flow, as well as LiveData and RxJava. 
+  - Built-in support for error handling, including refresh and retry capabilities.
+    
+### API keys
+
+You need to supply API / client keys for the service the app uses.
+
+- [TMDb](https://developers.themoviedb.org)
+
+Once you obtain the key, you can set them in your `~/local.properties`:
