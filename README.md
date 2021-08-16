@@ -48,7 +48,7 @@ You need to supply API / client keys for the service the app uses.
 
 Once you obtain the key, you can set them in your `~/local.properties`:
 
-#Architecture
+### Architecture
 The architecture is built around Android Architecture Components and follows the recommendations laid out in the Guide to App Architecture.
 Logic is kept away from Activities and moved to ViewModels. 
 Data is observed using Kotlin Flows and the Data Binding Library binds UI components in layouts to the app's data sources.
