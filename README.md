@@ -14,8 +14,10 @@ All data has been got from [TheMovieDb.Org](https://themoviedb.org) public api
 # Features
 The app displays a list of tv shows. Users can see details about them and also navigate between similar
 tv shows
+![](gif2.gif)  
+
 ![](gif1.gif)
-![](gif2.gif)
+
 ![](gif3.gif)
 
 
