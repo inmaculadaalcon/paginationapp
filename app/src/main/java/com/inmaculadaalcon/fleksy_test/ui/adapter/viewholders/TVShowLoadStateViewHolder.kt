@@ -1,4 +1,4 @@
-package com.inmaculadaalcon.fleksy_test.ui.adapter
+package com.inmaculadaalcon.fleksy_test.ui.adapter.viewholders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

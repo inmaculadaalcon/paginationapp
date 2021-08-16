@@ -6,17 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tv_shows_recyclerview"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/similar_tv_shows_view_holder"
-        android:orientation="horizontal"
-        tools:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,5 +21,26 @@
             android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tv_shows_recyclerview"
+        app:layout_constraintBottom_toTopOf="@id/similar_recyclerview"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/similar_tv_shows_view_holder"
+        android:orientation="horizontal"
+        tools:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/similar_recyclerview"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

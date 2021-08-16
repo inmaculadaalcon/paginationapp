@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.inmaculadaalcon.fleksy_test.databinding.SimilarTvShowsViewHolderBinding
 import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
+import com.inmaculadaalcon.fleksy_test.ui.adapter.diffcallbacks.SimilarTVShowDiffCallback
+import com.inmaculadaalcon.fleksy_test.ui.adapter.viewholders.SimilarTVShowViewHolder
 
 class SimilarTVShowsAdapter: PagingDataAdapter<TVShow, SimilarTVShowViewHolder>(SimilarTVShowDiffCallback()){
 

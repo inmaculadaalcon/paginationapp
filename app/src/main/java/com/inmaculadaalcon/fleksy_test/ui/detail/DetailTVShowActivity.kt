@@ -3,7 +3,7 @@ package com.inmaculadaalcon.fleksy_test.ui.detail
 import ProminentLayoutManager
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.AbsListView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
@@ -14,12 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.inmaculadaalcon.fleksy_test.databinding.DetailTvshowActivityBinding
 import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
 import com.inmaculadaalcon.fleksy_test.ui.adapter.SimilarTVShowsAdapter
+import com.inmaculadaalcon.fleksy_test.ui.adapter.SimilarTVShowsInDetailAdapter
 import com.inmaculadaalcon.fleksy_test.ui.adapter.TVShowsLoadStateAdapter
 import com.inmaculadaalcon.fleksy_test.ui.base.BaseActivity
 import com.inmaculadaalcon.fleksy_test.ui.paging.asMergedLoadStates
 import com.squareup.moshi.Moshi
-import kotlinx.android.synthetic.main.detail_tvshow_activity.*
-import kotlinx.android.synthetic.main.top_rated_tv_show_item_view.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -40,6 +39,7 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
     private val moshi: Moshi by inject()
 
     private val adapter = SimilarTVShowsAdapter()
+    private val adapterSimilarInDetail = SimilarTVShowsInDetailAdapter()
     val snapHelper = PagerSnapHelper()
 
     private var tvShowId: Int = 0
@@ -50,7 +50,11 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
         tvShowId = intent.getIntExtra(TV_SHOW_ID, 0)
         val jsonTVShow = intent.getStringExtra(TV_SHOW)
         tvShow = moshi.adapter(TVShow::class.java).fromJson(jsonTVShow!!)
-
+        binding.root.background = tvShow?.backgroundColor?.let {
+            ContextCompat.getDrawable(this,
+                it
+            )
+        }
         collectUIState()
 
         binding.back.setOnClickListener {
@@ -65,21 +69,47 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
 
         with(binding.tvShowsRecyclerview) {
             setItemViewCacheSize(4)
-            binding.tvShowsRecyclerview.layoutManager = ProminentLayoutManager(this.context)
+            binding.tvShowsRecyclerview.layoutManager =  LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             snapHelper.attachToRecyclerView(this)
         }
+
+        binding.similarRecyclerview.setHasFixedSize(true)
+        binding.similarRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.similarRecyclerview.adapter = adapterSimilarInDetail
+
 
         binding.tvShowsRecyclerview.addOnScrollListener(object: RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState === RecyclerView.SCROLL_STATE_IDLE) {
                     val position: Int = (binding.tvShowsRecyclerview.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                    getItemObject(position)
+                    val tvShowSelected = getItemObject(position)
+                    binding.root.background =  tvShowSelected.backgroundColor?.let {
+                        ContextCompat.getDrawable(recyclerView.context,
+                            it
+                        )
+                    }
+                    lifecycleScope.launch {
+                        tvShowSelected.let {
+                            viewModel.getSimilarTVShows(tvShowSelected.id, it).collectLatest {
+                                binding.similarRecyclerview.scrollToPosition(0)
+                                adapterSimilarInDetail.submitData(it)
+                            }
+                        }
+                    }
                 }
             }
         })
 
-        adapter.addLoadStateListener { loadState -> renderUI(loadState) }
+        lifecycleScope.launch {
+            tvShow?.let {
+                viewModel.getSimilarTVShows(tvShow!!.id, tvShow!!).collectLatest {
+                    adapterSimilarInDetail.submitData(it)
+                }
+            }
+        }
+
+         adapter.addLoadStateListener { loadState -> renderUI(loadState) }
 
         lifecycleScope.launchWhenCreated {
             adapter.loadStateFlow
@@ -105,25 +135,22 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
 
         lifecycleScope.launchWhenStarted {
             viewModel.screenState.collect { it ->
-                if (it != null){
+             //   if (it != null){
                    // drawDetails(it.data) -> This method was calling when I tried to make this with the detail service
-                }
+              //  }
             }
         }
     }
 
     private fun getItemObject(position: Int): TVShow {
-       val tvShow =  adapter.getItemObject(position)
         //Call to get the similar tvshows
-        println("TVSHOW-<>>>>>> ${tvShow.name}")
-        return tvShow
+        return adapter.getItemObject(position)
     }
 
     private fun collectUIState() {
         lifecycleScope.launch {
             tvShow?.let {
                 viewModel.getSimilarTVShows(tvShowId, it).collectLatest { it ->
-                    println("It -> $it.")
                     adapter.submitData(it)
                 }
             }
@@ -136,14 +163,8 @@ class DetailTVShowActivity: BaseActivity<DetailTvshowActivityBinding>(), KoinCom
 
     private fun renderUI(loadState: CombinedLoadStates) {
         val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
-
         binding.tvShowsRecyclerview.isVisible = !isListEmpty
-
-        // Only shows the list if refresh succeeds.
         binding.tvShowsRecyclerview.isVisible = loadState.source.refresh is LoadState.NotLoading
-        // Show loading spinner during initial load or refresh.
-        // Show the retry state if initial load or refresh fails.
-       // binding.similarTvshows.isVisible = loadState.source.refresh is LoadState.Error
     }
 
 }

@@ -19,7 +19,6 @@ class DetailTVShowViewModel(private val tvShowsRepository: TVShowsRepository): V
     fun getDetailTVShow(tvShowId: Int){
         viewModelScope.launch {
             tvShowsRepository.getDetailTVShow(tvShowId).collect {
-                println("It -> $it")
                 val detailScreenState = TVShowDetailScreenState.SuccessTopRatedTVShows(it as DetailTVShow)
                 screenStateQueue.value =  detailScreenState
             }

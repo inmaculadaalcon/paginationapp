@@ -1,4 +1,4 @@
-package com.inmaculadaalcon.fleksy_test.ui.adapter
+package com.inmaculadaalcon.fleksy_test.ui.adapter.diffcallbacks
 
 import androidx.recyclerview.widget.DiffUtil
 import com.inmaculadaalcon.fleksy_test.domain.model.TVShow

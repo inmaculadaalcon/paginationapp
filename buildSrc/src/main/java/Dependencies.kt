@@ -101,7 +101,7 @@ object KotlinDependencies {
 }
 
 object MockDependencies {
-  const val mockWebServer = "\"com.squareup.okhttp3:mockwebserver:${Versions.mockWebServer}"
+  const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.mockWebServer}"
 }
 
 object LifeCycleDependencies {

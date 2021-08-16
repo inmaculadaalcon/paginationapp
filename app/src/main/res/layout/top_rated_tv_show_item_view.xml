@@ -12,13 +12,16 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       android:focusable="true"
-      android:background="@drawable/background_purple"
+      app:cardCornerRadius="20dp"
+      app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.Cut"
       android:layout_width="match_parent"
       android:layout_height="140dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="?attr/selectableItemBackground"
         android:layout_height="match_parent">
+
       <ImageView
           android:id="@+id/tvshow_image"
           android:layout_width="100dp"

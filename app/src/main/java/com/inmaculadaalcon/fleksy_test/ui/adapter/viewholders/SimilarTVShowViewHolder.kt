@@ -1,4 +1,4 @@
-package com.inmaculadaalcon.fleksy_test.ui.adapter
+package com.inmaculadaalcon.fleksy_test.ui.adapter.viewholders
 
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -17,7 +17,7 @@ class SimilarTVShowViewHolder(val binding: SimilarTvShowsViewHolderBinding): Rec
 
     fun bind(tvShow: TVShow) {
         this.similarTVShowItem = tvShow
-        binding.root.background = ContextCompat.getDrawable(itemView.context, tvShow.backgroundColor)
+       // binding.root.background = ContextCompat.getDrawable(itemView.context, tvShow.backgroundColor)
         val urlBackground = if (tvShow.backdropPath == null) "" else  BuildConfig.IMAGE_BASE_URL+ tvShow.backdropPath
         val urlPoster = if (tvShow.posterPath == null) "" else BuildConfig.IMAGE_BASE_URL + tvShow.posterPath
         binding.title.text = tvShow.name
@@ -36,6 +36,5 @@ class SimilarTVShowViewHolder(val binding: SimilarTvShowsViewHolderBinding): Rec
             binding.imageBackground.visibility = View.VISIBLE
             Glide.with(itemView.context).load(urlBackground).transform(RoundedCorners(20)).into(binding.imageBackground) //TODO Add a placeholder
         }
-
     }
 }

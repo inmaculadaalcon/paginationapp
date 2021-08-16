@@ -7,6 +7,8 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.paging.PagingDataAdapter
 import com.inmaculadaalcon.fleksy_test.databinding.TopRatedTvShowItemViewBinding
 import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
+import com.inmaculadaalcon.fleksy_test.ui.adapter.diffcallbacks.TVShowDiffCallback
+import com.inmaculadaalcon.fleksy_test.ui.adapter.viewholders.TVShowViewHolder
 import com.inmaculadaalcon.fleksy_test.ui.detail.DetailTVShowActivity
 import com.squareup.moshi.Moshi
 import org.koin.core.component.KoinComponent
