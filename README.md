@@ -55,8 +55,7 @@ Data is observed using Kotlin Flows and the Data Binding Library binds UI compon
 
 The [Jetpack Benchmark library](https://developer.android.com/studio/profile/benchmark) makes it easy to benchmark your code from within Android Studio.
 The library handles warmup, measures your code performance, and outputs benchmarking results to the Android Studio console. 
-I added a few benchmark tests around critical paths during app startup - in particular, the parsing of the bootstrap data. 
-This enables us to automate measuring and monitoring initial startup time
+I try to add a few benchmark tests but I couldn't end them
 
 
 Dependency Injection is implemented with [Koin](https://insert-koin.io/). I prefer to use this di library because is the last one I used in my current project.
