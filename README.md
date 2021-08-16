@@ -23,7 +23,8 @@ tv shows
 
 # Development Environment
 This app is written entirely in Kotlin and uses the Gradle build system
-
+Asynchronous tasks are handled with coroutines. 
+Coroutines allow for simple and safe management of one-shot operations as well as building and consuming streams of data using Kotlin Flows.
 
 ### Libraries
 
@@ -46,3 +47,19 @@ You need to supply API / client keys for the service the app uses.
 - [TMDb](https://developers.themoviedb.org)
 
 Once you obtain the key, you can set them in your `~/local.properties`:
+
+#Architecture
+The architecture is built around Android Architecture Components and follows the recommendations laid out in the Guide to App Architecture.
+Logic is kept away from Activities and moved to ViewModels. 
+Data is observed using Kotlin Flows and the Data Binding Library binds UI components in layouts to the app's data sources.
+
+The [Jetpack Benchmark library](https://developer.android.com/studio/profile/benchmark) makes it easy to benchmark your code from within Android Studio.
+The library handles warmup, measures your code performance, and outputs benchmarking results to the Android Studio console. 
+I added a few benchmark tests around critical paths during app startup - in particular, the parsing of the bootstrap data. 
+This enables us to automate measuring and monitoring initial startup time
+
+
+Dependency Injection is implemented with [Koin](https://insert-koin.io/). I prefer to use this di library because is the last one I used in my current project.
+But It is easy to change to Hilt for example.
+
+Inmaculada Alcón Piñero
