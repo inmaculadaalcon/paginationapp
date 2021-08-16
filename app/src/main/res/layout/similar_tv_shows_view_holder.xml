@@ -8,7 +8,10 @@
         android:id="@+id/title_and_poster"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
@@ -46,9 +49,9 @@
         app:layout_constraintTop_toBottomOf="@+id/title_and_poster"
         app:layout_constraintStart_toStartOf="parent"
         android:scaleType="fitXY"
-        android:layout_margin="20dp"
+        android:layout_margin="40dp"
         android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+        android:layout_height="200dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         app:layout_constraintTop_toBottomOf="@+id/image_background"
@@ -93,10 +96,11 @@
             tools:text="overview"
             android:ellipsize="end"
             android:textColor="@color/white"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/montserrat_medium"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:maxLines="12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

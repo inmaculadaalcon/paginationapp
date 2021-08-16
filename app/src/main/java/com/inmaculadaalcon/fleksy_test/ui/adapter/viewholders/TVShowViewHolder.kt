@@ -10,6 +10,7 @@ import com.inmaculadaalcon.fleksy_test.BuildConfig
 import com.inmaculadaalcon.fleksy_test.databinding.TopRatedTvShowItemViewBinding
 import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
 import com.inmaculadaalcon.fleksy_test.ui.detail.DetailTVShowActivity
+import kotlinx.android.synthetic.main.top_rated_tv_show_item_view.view.*
 
 class TVShowViewHolder(val binding: TopRatedTvShowItemViewBinding): RecyclerView.ViewHolder(binding.root) {
     private val title: TextView = binding.tvshowText

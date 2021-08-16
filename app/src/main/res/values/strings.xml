@@ -4,4 +4,5 @@
     <string name="tvshow_empty_message">There aren\'t TVShows to show up</string>
     <string name="tvshow_btn_retry">retry</string>
     <string name="tvshow_title">TopRated TV shows</string>
+    <string name="similar_tvshows">Similar TVShows</string>
 </resources>

@@ -29,6 +29,7 @@ class TopRatedTVShowsAdapter: PagingDataAdapter<TVShow, TVShowViewHolder>(TVShow
                 val intent = Intent(view.context, DetailTVShowActivity::class.java)
                 intent.putExtra(DetailTVShowActivity.BACKGROUND_COLOR, tvShow.backgroundColor)
                 intent.putExtra(DetailTVShowActivity.TV_SHOW_ID, tvShow.id)
+
                 val jsonTVShow = moshi.adapter<TVShow>(TVShow::class.java).toJson(tvShow)
                 intent.putExtra(DetailTVShowActivity.TV_SHOW, jsonTVShow)
                 startActivity(view.context, intent, null)

@@ -41,7 +41,6 @@ class MainActivity: BaseActivity<ActivityMainBinding>(){
       footer = TVShowsLoadStateAdapter{ adapter.retry() }
     )
 
-
     binding.retryButton.setOnClickListener { adapter?.retry() }
 
     val linearLayoutManager = LinearLayoutManager(this)

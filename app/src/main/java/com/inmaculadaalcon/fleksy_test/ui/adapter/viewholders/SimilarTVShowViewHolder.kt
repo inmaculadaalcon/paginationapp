@@ -17,7 +17,6 @@ class SimilarTVShowViewHolder(val binding: SimilarTvShowsViewHolderBinding): Rec
 
     fun bind(tvShow: TVShow) {
         this.similarTVShowItem = tvShow
-       // binding.root.background = ContextCompat.getDrawable(itemView.context, tvShow.backgroundColor)
         val urlBackground = if (tvShow.backdropPath == null) "" else  BuildConfig.IMAGE_BASE_URL+ tvShow.backdropPath
         val urlPoster = if (tvShow.posterPath == null) "" else BuildConfig.IMAGE_BASE_URL + tvShow.posterPath
         binding.title.text = tvShow.name
