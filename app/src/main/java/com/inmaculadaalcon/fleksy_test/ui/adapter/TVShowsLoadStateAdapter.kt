@@ -3,6 +3,7 @@ package com.inmaculadaalcon.fleksy_test.ui.adapter
 import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
+import com.inmaculadaalcon.fleksy_test.ui.adapter.viewholders.TVShowLoadStateViewHolder
 
 class TVShowsLoadStateAdapter(private val retry: () -> Unit): LoadStateAdapter<TVShowLoadStateViewHolder>() {
     override fun onBindViewHolder(holder: TVShowLoadStateViewHolder, loadState: LoadState) {

@@ -7,16 +7,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import arrow.core.right
-import arrow.core.rightIfNotNull
 import com.inmaculadaalcon.fleksy_test.databinding.ActivityMainBinding
-import com.inmaculadaalcon.fleksy_test.domain.model.TopRatedTVShow
 import com.inmaculadaalcon.fleksy_test.ui.adapter.TVShowsLoadStateAdapter
-import com.inmaculadaalcon.fleksy_test.ui.adapter.TopRatedTVShowAdapter
 import com.inmaculadaalcon.fleksy_test.ui.adapter.TopRatedTVShowsAdapter
 import com.inmaculadaalcon.fleksy_test.ui.base.BaseActivity
 import com.inmaculadaalcon.fleksy_test.ui.paging.asMergedLoadStates
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -25,7 +20,7 @@ import kotlinx.coroutines.launch
 
 import org.koin.core.component.inject
 
-class MainActivity() : BaseActivity<ActivityMainBinding>(){
+class MainActivity: BaseActivity<ActivityMainBinding>(){
 
   override val bindingInflater: (LayoutInflater) -> ActivityMainBinding
     get() = ActivityMainBinding::inflate
@@ -42,14 +37,16 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(){
 
     binding.recyclerview.setHasFixedSize(true)
     binding.recyclerview.adapter = adapter.withLoadStateHeaderAndFooter(
-      header = TVShowsLoadStateAdapter{ adapter?.retry()},
-      footer = TVShowsLoadStateAdapter{ adapter?.retry()}
+      header = TVShowsLoadStateAdapter{ adapter.retry() },
+      footer = TVShowsLoadStateAdapter{ adapter.retry() }
     )
+
+    binding.retryButton.setOnClickListener { adapter?.retry() }
 
     val linearLayoutManager = LinearLayoutManager(this)
     binding.recyclerview.layoutManager = linearLayoutManager
 
-    adapter?.addLoadStateListener { loadState -> renderUI(loadState) }
+    adapter.addLoadStateListener { loadState -> renderUI(loadState) }
 
     lifecycleScope.launchWhenCreated {
       adapter.loadStateFlow
@@ -73,11 +70,10 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(){
                 adapter.submitData(tvshows)
             }
         }
-
     }
 
     private fun renderUI(loadState: CombinedLoadStates) {
-    val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter?.itemCount == 0
+    val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
 
     binding.recyclerview.isVisible = !isListEmpty
     binding.tvshowEmpty.isVisible = isListEmpty
@@ -87,7 +83,7 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(){
     // Show loading spinner during initial load or refresh.
     binding.progressbarTvshows.isVisible = loadState.source.refresh is LoadState.Loading
     // Show the retry state if initial load or refresh fails.
-    binding.btnMoviesRetry.isVisible = loadState.source.refresh is LoadState.Error
+    binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
   }
 
 }

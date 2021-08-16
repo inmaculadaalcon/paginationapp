@@ -3,7 +3,7 @@ package com.inmaculadaalcon.fleksy_test.data.api.rest
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.inmaculadaalcon.fleksy_test.data.api.model.TVShowDto
-import com.inmaculadaalcon.fleksy_test.data.datasource.TVShowDataSourceImpl.Companion.SERVICE_PAGE_SIZE
+import com.inmaculadaalcon.fleksy_test.di.tvShowsModule
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -15,26 +15,19 @@ class TVShowsPagingSource(private val rest: MovieDBRest): PagingSource<Int, TVSh
 
     override fun getRefreshKey(state: PagingState<Int, TVShowDto>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
-            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1) ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
         }
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TVShowDto> {
         val pageIndex = params.key ?: FIRST_PAGE_INDEX
         return try {
-            val response = rest.getTopRatedTV( language = "en-US",
-                page = pageIndex)
+            val response = rest.getTopRatedTV( language = "en-US", page = pageIndex)
             val tvshows = response.results
-            val nextIndex =
-                if (tvshows.isEmpty()) {
-                    null
-                } else {
-                    pageIndex + (params.loadSize / SERVICE_PAGE_SIZE)
-                }
             LoadResult.Page(
                 data = tvshows,
                 prevKey =  if (pageIndex == FIRST_PAGE_INDEX) null else pageIndex,
-                nextKey = nextIndex
+                nextKey = pageIndex + 1
             )
 
         } catch (exception: IOException) {

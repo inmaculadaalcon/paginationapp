@@ -8,6 +8,7 @@ import com.inmaculadaalcon.fleksy_test.data.datasource.TVShowsDatasources
 import com.inmaculadaalcon.fleksy_test.data.repository.TVShowsRepository
 import com.inmaculadaalcon.fleksy_test.data.repository.TVShowsRepositoryImpl
 import com.inmaculadaalcon.fleksy_test.domain.ResponseError
+import com.inmaculadaalcon.fleksy_test.ui.detail.DetailTVShowViewModel
 import com.inmaculadaalcon.fleksy_test.ui.main.TopRatedTVShowsListViewModel
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -35,6 +36,7 @@ val tvShowsModule = module {
     factory<TVShowsDatasources> { TVShowDataSourceImpl(movieDBRest = get()) }
     factory<TVShowsRepository> {TVShowsRepositoryImpl(tvShowsDatasources = get())}
     viewModel { TopRatedTVShowsListViewModel(tvShowsRepository = get()) }
+    viewModel { DetailTVShowViewModel(tvShowsRepository = get())}
 }
 
 
