@@ -36,7 +36,7 @@ object Versions {
 
 object DefaultConfigValues {
   const val BUILD_TOOLS = "30.0.2"
-  const val APPLICATION_ID = "com.inmaculadaalcon.fleksy_test"
+  const val APPLICATION_ID = "com.inmaculadaalcon.pagination"
   const val COMPILE_SDK = 31
   const val MIN_SDK = 21
   const val TARGET_SDK = 31

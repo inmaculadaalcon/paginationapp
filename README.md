@@ -1,11 +1,11 @@
-Fleksy Test Android App
+Pagination Android App
 ================================= 
 
-** This is the code for an application to apply for the Android Engineer position at Fleksy
+** This is the code for investigating some news ways for implementing pagination in Android
 
 # Description
 
-The Fleksy-Test App is an application which will show an endless list of top rated tv shows and if 
+The Pagination App is an application which will show an endless list of top rated tv shows and if 
 We click over any of the item list It will appear the detail of the show and also if we swipe to 
 left or right It will show the similar tv shows and also in each similar tvshow we can see another
 list at bottom with similar to it.
@@ -55,7 +55,7 @@ Data is observed using Kotlin Flows and the Data Binding Library binds UI compon
 
 The [Jetpack Benchmark library](https://developer.android.com/studio/profile/benchmark) makes it easy to benchmark your code from within Android Studio.
 The library handles warmup, measures your code performance, and outputs benchmarking results to the Android Studio console. 
-I try to add a few benchmark tests but I couldn't end them
+I try to add a few benchmark tests also
 
 
 Dependency Injection is implemented with [Koin](https://insert-koin.io/). I prefer to use this di library because is the last one I used in my current project.
