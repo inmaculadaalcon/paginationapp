@@ -1,9 +1,9 @@
 package com.inmaculadaalcon.data
 
 import com.inmaculadaalcon.common.FileReaderUtil
-import com.inmaculadaalcon.fleksy_test.BuildConfig
-import com.inmaculadaalcon.fleksy_test.data.api.rest.MovieDBRest
-import com.inmaculadaalcon.fleksy_test.di.provideMoshi
+import com.inmaculadaalcon.pagination.BuildConfig
+import com.inmaculadaalcon.pagination.data.api.rest.MovieDBRest
+import com.inmaculadaalcon.pagination.di.provideMoshi
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient

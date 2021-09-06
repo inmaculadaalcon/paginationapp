@@ -1,4 +1,4 @@
-package com.inmaculadaalcon.fleksy_test
+package com.inmaculadaalcon.pagination
 
 import android.os.Bundle
 import androidx.annotation.VisibleForTesting
@@ -8,9 +8,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.inmaculadaalcon.fleksy_test.databinding.ActivityBenchmarkBinding
-import com.inmaculadaalcon.fleksy_test.domain.model.TVShow
-import com.inmaculadaalcon.fleksy_test.ui.adapter.SimilarTVShowsInDetailAdapter
+import com.inmaculadaalcon.pagination.databinding.ActivityBenchmarkBinding
+import com.inmaculadaalcon.pagination.domain.model.TVShow
+import com.inmaculadaalcon.pagination.ui.adapter.SimilarTVShowsInDetailAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

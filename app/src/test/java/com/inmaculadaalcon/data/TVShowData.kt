@@ -1,8 +1,8 @@
 package com.inmaculadaalcon.data
 
 import com.inmaculadaalcon.common.FileReaderUtil
-import com.inmaculadaalcon.fleksy_test.data.api.model.TVShowDto
-import com.inmaculadaalcon.fleksy_test.domain.ResponseItems
+import com.inmaculadaalcon.pagination.data.api.model.TVShowDto
+import com.inmaculadaalcon.pagination.domain.ResponseItems
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
