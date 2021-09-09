@@ -1,4 +1,4 @@
-package com.inmaculadaalcon.fleksy_test
+package com.inmaculadaalcon.pagination
 
 import java.util.*
 import java.util.concurrent.Executor

@@ -1,4 +1,4 @@
-package com.inmaculadaalcon.fleksy_test
+package com.inmaculadaalcon.pagination
 
 import org.junit.Test
 

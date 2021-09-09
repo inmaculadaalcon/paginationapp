@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.inmaculadaalcon.fleksy_test">
+    package="com.inmaculadaalcon.pagination">
 
     <application
         android:debuggable="false"
